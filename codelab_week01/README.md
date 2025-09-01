@@ -8,21 +8,25 @@
 
 ---
 
+<div align="center">
+
 ### **Dosen Pembimbing**
 **Habibie Ed Dien, S.Kom., M.T.**
 
 ---
 
 ### **Disusun oleh**
-- **Nama**  : Cakra Wangsa M.A.W
-- **NIM**   : 2341720032
-- **Kelas** : TI-3G
-- **Program Studi** : D-4 Teknik Informatika
+**Nama**  : Cakra Wangsa M.A.W
+**NIM**   : 2341720032
+**Kelas** : TI-3G
+**Program Studi** : D-4 Teknik Informatika
 
 ---
 
 ### **Alamat Kampus**
-Politeknik Negeri Malan
+Politeknik Negeri Malang
 Jl. Soekarno Hatta No.9, Jatimulyo, Kec. Lowokwaru, Kota Malang, Jawa Timur 65141
 **Phone** : (0341) 404424, 404425
 **Email** : [Polinema.ac.id](https://www.polinema.ac.id)
+
+</div>
