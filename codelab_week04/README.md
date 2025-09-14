@@ -39,27 +39,27 @@ Jl. Soekarno Hatta No.9, Jatimulyo, Kec. Lowokwaru, Kota Malang, Jawa Timur 6514
 ## Langkah 1
 Ketik atau salin kode program berikut ke dalam `void main()`.
 
-![alt text](image.png)
+![Kode Program](img/image.png)
 
 ## Langkah 2
 Silakan coba eksekusi (Run) kode pada langkah 1 tersebut. Apa yang terjadi? Jelaskan!
 
 Kode berhasil dijalankan tanpa error karena list bertipe `List<int>` yang bersifat mutable, sehingga elemen dapat diubah tanpa mengganti objek list. Semua `assert` terpenuhi dan tidak ada pelanggaran tipe data, sehingga program berjalan normal dengan output:
 
-![alt text](image-1.png)
+![Output Langkah 1](img/image-1.png)
 
 ## Langkah 3
 Ubah kode pada langkah 1 menjadi variabel `final` yang mempunyai `index = 5` dengan default value = `null`. Isilah nama dan NIM Anda pada elemen `index` ke-1 dan ke-2. Lalu print dan capture hasilnya.
 
 Apa yang terjadi? Jika terjadi error, silakan perbaiki.
 
-**Jawab:**
+**Jawab:**  
 Kode pada langkah 3 berhasil dijalankan tanpa error karena `final` hanya membuat referensi list tidak bisa diarahkan ke list lain, tetapi elemen di dalamnya tetap dapat diubah (mutable). Dengan `List<String?>.filled(5, null)` dibuat list sepanjang 5 dengan nilai awal `null`, kemudian `list[1]` diisi dengan nama dan `list[2]` diisi dengan NIM.
 
 **Kode Program:**
 
-![alt text](image-2.png)
+![Kode Program Langkah 3](img/image-2.png)
 
 **Output:**
 
-![alt text](image-3.png)
+![Output Langkah 3](img/image-3.png)
