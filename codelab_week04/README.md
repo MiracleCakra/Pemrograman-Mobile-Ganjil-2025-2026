@@ -53,7 +53,7 @@ Ubah kode pada langkah 1 menjadi variabel `final` yang mempunyai `index = 5` den
 
 Apa yang terjadi? Jika terjadi error, silakan perbaiki.
 
-**Jawab:**  
+**Jawab:**
 Kode pada langkah 3 berhasil dijalankan tanpa error karena `final` hanya membuat referensi list tidak bisa diarahkan ke list lain, tetapi elemen di dalamnya tetap dapat diubah (mutable). Dengan `List<String?>.filled(5, null)` dibuat list sepanjang 5 dengan nilai awal `null`, kemudian `list[1]` diisi dengan nama dan `list[2]` diisi dengan NIM.
 
 **Kode Program:**
@@ -63,3 +63,49 @@ Kode pada langkah 3 berhasil dijalankan tanpa error karena `final` hanya membuat
 **Output:**
 
 ![Output Langkah 3](img/image-3.png)
+
+---
+
+# Praktikum 2: Eksperimen Tipe Data Set
+
+## Langkah 1
+Ketik atau salin kode program berikut ke dalam fungsi `main()`.
+
+### Kode Program
+![Kode Langkah 1](img/praktikum2_week4Mobile.jpg)
+
+### Output
+![Output Langkah 1](img/outputpraktikum2_langkah1_week4Mobile.jpg.png)
+
+---
+
+## Langkah 2
+Silakan coba eksekusi (Run) kode pada langkah 1 tersebut. Apa yang terjadi? Jelaskan! Lalu perbaiki jika terjadi error.
+
+**Jawab:**
+Pada kode program akan menampilkan isi set tanpa error karena semua elemennya unik dan bertipe String. Set digunakan untuk menyimpan data yang tidak boleh duplikat, urutan elemen akan mengikuti urutan saat dimasukkan, dan proses pengecekan anggotanya cepat. Dan pada tanda `{}` kosong akan dianggap sebagai Map, jadi untuk membuat set kosong harus ditulis dengan `<T>{}` atau `Set<T>()`.
+
+---
+
+## Langkah 3
+Tambahkan kode program berikut, lalu coba eksekusi (Run) kode Anda.
+
+**Jawab:**
+
+### Kode Program
+![Kode Program sebelum ditambahkan](img/praktikum2_langkah3_week4Mobile.jpg)
+
+### Output
+![Output Program sebelum ditambahkan](img/outputpraktikum2_langkah3_week4Mobile.jpg.png)
+
+Jika kode program tidak diberikan tambahan. Pada kode program akan menghasilkan output, di baris pertama akan menampilkan daftar unsur halogen karena Dart mengenalinya sebagai Set berisi string. Dua variabel berikutnya (`names1` dan `names2`) juga adalah `Set<String>` kosong, sehingga saat dicetak terlihat `{}`. Namun, variabel terakhir (`names3`) dibuat dengan `{}` tanpa tipe, sehingga Dart menganggapnya sebagai Map kosong, bukan Set. Meskipun memiliki tampilan yang sama pada output, tipe datanya berbeda, sehingga cara penggunaannya di program juga akan berbeda.
+
+---
+
+### Kode Program (Setelah Perbaikan)
+![Kode program setelah perbaikan](img/praktikum2_Perbaikanlangkah3_week4Mobile.jpg)
+
+### Output
+![Output setelah perbaikan](img/outputpraktikum2_perbaikanlangkah3_week4Mobile.jpg.png)
+
+Namun jika kode program diberikan perbaikan pada langkah ini dengan tiga variabel: `names1 = <String>{}` dan `names2 = {}` yang adalah Set kosong, sedangkan `names3 = {}` sebenarnya Map kosong. Maka isi pada `names1` dengan nama dan NIM menggunakan `.add()` satu per satu, dan `names2` menggunakan `.addAll()` sekaligus. Saat dijalankan, keduanya menampilkan isi Set sesuai urutan yang ditambahkan, sedangkan `names3` tetap `{}` karena Map kosong.
