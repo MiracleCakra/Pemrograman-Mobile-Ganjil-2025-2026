@@ -173,3 +173,116 @@ Keduanya langsung diisi data, lalu dicetak.
 Setelah itu dibuat `mhs1` (Map dengan kunci dan nilai `String`) yang diisi data nama dan NIM, serta `mhs2` (Map dengan kunci `int` dan nilai `String`) yang juga diisi data yang sama.
 Semua Map tersebut kemudian dicetak, sehingga terlihat isi masing-masing sesuai tipe dan data yang dimasukkan.
 
+---
+
+# Praktikum 4: Eksperimen Tipe Data List: Spread dan Control-flow Operators
+
+## Langkah 1:
+Ketik atau salin kode program berikut ke dalam fungsi main().
+
+Jawab:
+
+[kode program](img/praktikum4_langkah1_week4Mobile.jpg)
+
+
+## Langkah 2:
+Silakan coba eksekusi (Run) kode pada langkah 1 tersebut. Apa yang terjadi? Jelaskan! Lalu perbaiki jika terjadi error.
+
+Jawab:
+
+[Output kode program](img/outputpraktikum4_langkah1_week4Mobile.jpg.png)
+
+Output kode program akan mengalami error dikarenakan pada variabel list1 tidak dideklarasikan, sehingga dart tidak dapat mengenali variabel tersebut.
+
+Perbaikan dan Output Kode
+
+![perbaikan kode dan output langkah 1](img/praktikum4_perbaikanlangkah1_week4Mobile.jpg.png)
+
+
+## Langkah 3:
+Tambahkan kode program berikut, lalu coba eksekusi (Run) kode Anda.
+Apa yang terjadi ? Jika terjadi error, silakan perbaiki.
+
+Jawab:
+
+Output kode akan mengalami error karena list1 otomatis akan dianggap bertipe List<int> (hanya boleh berisi angka), sehingga saat menambahkan null, Dart menolak karena tipe int tidak mengizinkan nilai kosong (null) tanpa adanya tanda tanya ?.
+
+Kode Program
+
+![kode error](img/praktikum4_langkah3_week4Mobile.jpg)
+
+Output
+
+![Output error](img/outputpraktikum4_langkah3_week4Mobile.jpg.png)
+
+---
+
+Perbaikan Kode
+
+Pada kode ini akan membuat dan memodifikasi list yang dapat berisi nilai null, lalu menggunakan spread (...) dan null-aware spread (...?) untuk menggabungkannya ke list baru agar tidak terjadi error.
+
+Kode Program
+
+![Perbaikan kode program](img/praktikum4_perbaikanlangkah3_week4Mobile.jpg)
+
+Output
+
+![Output hasil perbaikan](img/outputpraktikum4_perbaikanlangkah3_week4Mobile.jpg.png)
+
+Tambahkan variabel list berisi NIM Anda menggunakan Spread Operators. Dokumentasikan hasilnya dan buat laporannya!
+
+Kode Program
+
+![Tambah Variabel NIM](img/praktikum4_tambahanNIMlangkah3_week4Mobile.jpg)
+
+Output
+
+![Output Tambah Variabel NIM](img/outputpraktikum4_tambahNIMlangkah3_week4Mobile.jpg.png)
+
+## Langkah 4:
+Tambahkan kode program berikut, lalu coba eksekusi (Run) kode Anda.
+
+Apa yang terjadi ? Jika terjadi error, silakan perbaiki. Tunjukkan hasilnya jika variabel promoActive ketika true dan false.
+Kode Dan Output Program
+
+![kode dan output error](img/praktikum4_langkah4_week4Mobile.jpg.png)
+
+Kode akan mengalami error dikarenakan pada variabel promoActive belum pernah dibuat atau dideklarasikan sebelumnya, sehingga Dart tidak mengenalinya saat kode dijalankan.
+
+---
+
+Perbaikan Kode
+
+Kode Program
+
+![Perbaikan Kode](img/praktikum4_perbaikanlangkah4_week4Mobile.jpg)
+
+Output
+
+![Output Hasil Perbaikan](img/outputpraktikum4_perbaikanlangkah4_week4Mobile.jpg.png)
+
+## Langkah 5:
+Tambahkan kode program berikut, lalu coba eksekusi (Run) kode Anda.
+
+Apa yang terjadi ? Jika terjadi error, silakan perbaiki. Tunjukkan hasilnya jika variabel login mempunyai kondisi lain.
+
+Kode dan Output Program
+
+![Kode Program Error]
+![Kode dan Output Error](img/praktikum4_langkah5_week4Mobile.jpg.png)
+
+Output akan mengalami error karena variabel login belum pernah dideklarasikan dan penulisan if (login case 'Manager') tidak sesuai sintaks Dart, sehingga program tidak tahu nilai yang dicek dan cara membandingkannya.
+
+Perbaikan Kode
+
+
+
+
+
+## Langkah 6:
+Tambahkan kode program berikut, lalu coba eksekusi (Run) kode Anda.
+
+---
+
+Apa yang terjadi ? Jika terjadi error, silakan perbaiki. Jelaskan manfaat Collection For dan dokumentasikan hasilnya.
+
