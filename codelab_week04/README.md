@@ -109,3 +109,67 @@ Jika kode program tidak diberikan tambahan. Pada kode program akan menghasilkan 
 ![Output setelah perbaikan](img/outputpraktikum2_perbaikanlangkah3_week4Mobile.jpg.png)
 
 Namun jika kode program diberikan perbaikan pada langkah ini dengan tiga variabel: `names1 = <String>{}` dan `names2 = {}` yang adalah Set kosong, sedangkan `names3 = {}` sebenarnya Map kosong. Maka isi pada `names1` dengan nama dan NIM menggunakan `.add()` satu per satu, dan `names2` menggunakan `.addAll()` sekaligus. Saat dijalankan, keduanya menampilkan isi Set sesuai urutan yang ditambahkan, sedangkan `names3` tetap `{}` karena Map kosong.
+
+---
+
+# Praktikum 3: Eksperimen Tipe Data Maps
+
+## Langkah 1
+Ketik atau salin kode program berikut ke dalam fungsi `main()`.
+
+**Jawab:**
+
+### Kode Program
+![Kode Program](img/praktikum3_langkah1_week4Mobile.jpg)
+
+### Output
+![Output](img/outputpraktikum3_langkah1_week4Mobile.jpg.png)
+
+---
+
+## Langkah 2
+Silakan coba eksekusi (Run) kode pada langkah 1 tersebut. Apa yang terjadi? Jelaskan! Lalu perbaiki jika terjadi error.
+
+**Jawab:**
+
+![Output Langkah 1](img/outputpraktikum3_langkah1_week4Mobile.jpg.png)
+
+Kode program menghasilkan output yang menunjukkan bahwa **Map** berhasil dibuat dan dicetak tanpa error karena format deklarasi benar.
+Dikarenakan **Map** menyimpan data dalam bentuk pasangan key–value, di mana setiap key harus unik.
+Data dapat diakses, ditambahkan, atau diubah menggunakan key-nya.
+
+---
+
+## Langkah 3
+Tambahkan kode program berikut, lalu coba eksekusi (Run) kode Anda.
+
+**Jawab:**
+
+### Kode Program
+![Kode program sebelum diperbaiki](img/praktikum3_langkah3_week4Mobile.jpg)
+
+### Output
+![Output sebelum diperbaiki](img/outputpraktikum3_langkah3_week4Mobile.jpg.png)
+
+Sebelumnya kode program membuat dua `Map`: `gifts` (kunci `String`) dan `nobleGases` (kunci `int`).
+Awalnya, keduanya berisi campuran nilai `String` dan `int`. Tetapi setelah menambahkan kode, maka akan mengubah nilai tertentu:
+`gifts['fifth']` dari `1` menjadi `'golden rings'`, dan `nobleGases[18]` dari `2` menjadi `'argon'`.
+Hasil akhirnya, kedua `Map` berisi nilai `String` semua, dan perubahan langsung terlihat saat dicetak ulang.
+
+---
+
+### Menambahkan elemen nama dan NIM Anda pada tiap variabel
+
+### Kode Program
+![Perbaikan Kode Program](img/praktikum3_perbaikanlangkah3_week4Mobile.jpg)
+
+### Output
+![Output Perbaikan](img/outputpraktikum3_perbaikanlangkah3_week4Mobile.jpg.png)
+
+Setelah program diberikan tambahan maka akan membuat dan menampilkan beberapa **Map** di Dart.
+Pertama, `gifts` berisi pasangan kunci–nilai dengan kunci bertipe `String`, sedangkan `nobleGases` berisi kunci bertipe `int`.
+Keduanya langsung diisi data, lalu dicetak.
+
+Setelah itu dibuat `mhs1` (Map dengan kunci dan nilai `String`) yang diisi data nama dan NIM, serta `mhs2` (Map dengan kunci `int` dan nilai `String`) yang juga diisi data yang sama.
+Semua Map tersebut kemudian dicetak, sehingga terlihat isi masing-masing sesuai tipe dan data yang dimasukkan.
+
