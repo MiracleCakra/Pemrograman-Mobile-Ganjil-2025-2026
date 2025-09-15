@@ -377,55 +377,53 @@ Jawab: Sudah Selesai Semua
 
    Jawab:
 
-   Positional Parameters
-      Definisi: Parameter yang urutannya wajib sesuai saat memanggil fungsi.
-      Ciri: Tidak diberi tanda khusus, dan semua harus diisi sesuai urutan.
+   ### Jenis-Jenis Parameter di Functions
 
-      Contoh sintaks
-
-      ```
-      main () {
-        void greet(String nama, String masadepan, int umur) {
-          print('Hai aku $nama, dari masadepan $masadepan, umurku $umur tahun');
-        }
-        greet('Sore','untuk membantumu coding!', 21);
+    **Positional Parameters**
+    **Definisi:** Parameter yang urutannya wajib sesuai saat memanggil fungsi.
+    **Ciri:** Tidak diberi tanda khusus, dan semua harus diisi sesuai urutan.
+    **Contoh sintaks:**
+    ```dart
+    main () {
+      void greet(String nama, String masadepan, int umur) {
+        print('Hai aku $nama, dari masadepan $masadepan, umurku $umur tahun');
       }
-      ```
+      greet('Sore','untuk membantumu coding!', 21);
+    }
 
-       Optional Positional Parameters
-       Definisi: Parameter yang posisinya tetap, tapi sifatnya opsional (boleh tidak diisi).
-       Ciri: Ditulis di dalam tanda [], bisa diberi nilai default.
+    **Optional Positional Parameters**
+    **Definisi:** Parameter yang posisinya tetap, tapi sifatnya opsional (boleh tidak diisi).
+    **Ciri:**Ditulis di dalam tanda [], bisa diberi nilai default..
+    **Contoh sintaks:**
 
-       ```
-      main () {
-        void sayHello(String nama, [String? pesan]) {
-          print('Halo $nama, ${pesan ?? "tidak ada pesan"}');
-        }
-        sayHello('Cakra');
-        sayHello('Cakra', 'Semangat!');
+    ```dart
+    main () {
+      void sayHello(String nama, [String? pesan]) {
+        print('Halo $nama, ${pesan ?? "tidak ada pesan"}');
       }
-      ```
+      sayHello('Cakra');
+      sayHello('Cakra', 'Semangat!');
+    }
+    ```
+    **Named Parameters**
+    **Definisi:** Parameter yang dipanggil berdasarkan nama, bukan urutan.
+    **Ciri:**Ditulis di dalam tanda {}, dan saat memanggil fungsi harus menyebutkan nama parameternya.
+    **Contoh sintaks:**
 
-    Named Parameters
-        Named Parameters
-        Definisi: Parameter yang dipanggil berdasarkan nama, bukan urutan.
-
-        Ciri: Ditulis di dalam tanda {}, dan saat memanggil fungsi harus menyebutkan nama parameternya.
-
-      ```
-      main () {
-        void buatProfil({required String nama, int Kelas = 0}) {
-          print('Nama: $nama, Kelas: $Kelas');
-        }
-        buatProfil(nama: 'Cakra', Kelas: 3);
-      }
-      ```
+    ```dart
+    main () {
+    void buatProfil({required String nama, int Kelas = 0}) {
+      print('Nama: $nama, Kelas: $Kelas');
+    }
+    buatProfil(nama: 'Cakra', Kelas: 3);
+    }
+    ```
 
 4. Jelaskan maksud Functions sebagai first-class objects beserta contoh sintaknya!
 
    jawab: function di Dart yang bisa diperlakukan seperti nilai: bisa disimpan dalam variabel, bisa dikirim sebagai parameter ke function lain, bahkan bisa dikembalikan dari function.
 
-  ```
+  ```dart
   void halo(String nama) => print("Halo $nama");
 
   // Fungsi yang menerima fungsi lain sebagai parameter
@@ -462,7 +460,7 @@ Jawab: Sudah Selesai Semua
 
    Jawab: Anonymous Function adalah function tanpa nama, yang digunakan untuk function kecil untuk dipakai satu kali, dan sering digunakan pada callback.
 
-  ```
+  ```dart
   void main() {
   var angka = [1, 2, 3];
   angka.forEach((n) {
@@ -477,7 +475,7 @@ Jawab: Sudah Selesai Semua
 
    a. Lexical Scope memiliki aturan yang sebagaimana variabel diakses berdasarkan lokasi kode.
 
-   ```
+   ```dart
     void main() {
     var x = 10;
     void tampilX() {
@@ -489,7 +487,7 @@ Jawab: Sudah Selesai Semua
 
    b.Lexical Closure adalah sebuah function yang mengikat variabel dari scope luar, dan bisa menyimpannya bahkan setelah scope luar selesai dieksekusi.
 
-  ```
+  ```dart
   Function counter() {
   var hitung = 0;
   return () {
@@ -509,7 +507,7 @@ Jawab: Sudah Selesai Semua
 
    Jawab: pemrograman, return multiple value berarti sebuah fungsi mengembalikan lebih dari satu hasil sekaligus. Konsep ini biasanya dilakukan dengan mengemas nilai-nilai tersebut ke dalam satu wadah seperti tuple, list, atau dictionary
 
-   ```
+   ```dart
       (String, int, List<String>) profilLengkap() {
       String nama = 'Cakra Wangsa M.A.W';
       int umur = 21;
