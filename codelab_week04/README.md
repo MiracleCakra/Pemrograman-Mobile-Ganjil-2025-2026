@@ -384,28 +384,25 @@ Jawab: Sudah Selesai Semua
       Contoh sintaks
 
       ```
-        // Positional Parameter
-  main () {
-    void greet(String nama, String masadepan, int umur) {
-      print('Hai aku $nama, dari masadepan $masadepan, umurku $umur tahun');
-    }
-    greet('Sore','untuk membantumu coding!', 21);
-  }
+      main () {
+        void greet(String nama, String masadepan, int umur) {
+          print('Hai aku $nama, dari masadepan $masadepan, umurku $umur tahun');
+        }
+        greet('Sore','untuk membantumu coding!', 21);
+      }
       ```
 
-    Optional Positional Parameters
+       Optional Positional Parameters
        Definisi: Parameter yang posisinya tetap, tapi sifatnya opsional (boleh tidak diisi).
        Ciri: Ditulis di dalam tanda [], bisa diberi nilai default.
 
        ```
-       main () {
-      void sayHello(String nama, [String? pesan]) {
-      print('Halo $nama, ${pesan ?? "tidak ada pesan"}');
-      }
-
-      sayHello('Cakra');
-      sayHello('Cakra', 'Semangat!');
-
+      main () {
+        void sayHello(String nama, [String? pesan]) {
+          print('Halo $nama, ${pesan ?? "tidak ada pesan"}');
+        }
+        sayHello('Cakra');
+        sayHello('Cakra', 'Semangat!');
       }
       ```
 
@@ -417,58 +414,56 @@ Jawab: Sudah Selesai Semua
 
       ```
       main () {
-      void buatProfil({required String nama, int Kelas = 0}) {
-      print('Nama: $nama, Kelas: $Kelas');
+        void buatProfil({required String nama, int Kelas = 0}) {
+          print('Nama: $nama, Kelas: $Kelas');
+        }
+        buatProfil(nama: 'Cakra', Kelas: 3);
       }
-
-      buatProfil(nama: 'Cakra', Kelas: 3);
-      }
-
       ```
 
 4. Jelaskan maksud Functions sebagai first-class objects beserta contoh sintaknya!
 
    jawab: function di Dart yang bisa diperlakukan seperti nilai: bisa disimpan dalam variabel, bisa dikirim sebagai parameter ke function lain, bahkan bisa dikembalikan dari function.
 
-   ```
-   void halo(String nama) => print("Halo $nama");
+  ```
+  void halo(String nama) => print("Halo $nama");
 
-    // Fungsi yang menerima fungsi lain sebagai parameter
-    void jalankan(void Function(String) fungsi, String value) {
-      fungsi(value);
-    }
+  // Fungsi yang menerima fungsi lain sebagai parameter
+  void jalankan(void Function(String) fungsi, String value) {
+    fungsi(value);
+  }
 
-    // Fungsi yang mengembalikan fungsi lain
-    Function buatPenyapa(String sapaan) {
-      return (String nama) => print("$sapaan, $nama!");
-    }
+  // Fungsi yang mengembalikan fungsi lain
+  Function buatPenyapa(String sapaan) {
+    return (String nama) => print("$sapaan, $nama!");
+  }
 
-    void main() {
-      // Simpan fungsi dalam variabel
-      var f = halo;
-      f("Sore");
+  void main() {
+    // Simpan fungsi dalam variabel
+    var f = halo;
+    f("Sore");
 
-      // Kirim fungsi sebagai parameter
-      jalankan(halo, "Gunawan");
+    // Kirim fungsi sebagai parameter
+    jalankan(halo, "Gunawan");
 
-      // Gunakan fungsi anonim langsung
-      jalankan((nama) => print("Selamat datang $nama"), "Cakra");
+    // Gunakan fungsi anonim langsung
+    jalankan((nama) => print("Selamat datang $nama"), "Cakra");
 
-      // Simpan fungsi hasil dari fungsi lain
-      var penyapaPagi = buatPenyapa("Selamat pagi");
-      penyapaPagi("Slamet");
+    // Simpan fungsi hasil dari fungsi lain
+    var penyapaPagi = buatPenyapa("Selamat pagi");
+    penyapaPagi("Slamet");
 
-      var penyapaMalam = buatPenyapa("Selamat malam");
-      penyapaMalam("Basuki");
-    }
+    var penyapaMalam = buatPenyapa("Selamat malam");
+    penyapaMalam("Basuki");
+  }
   ```
 
 5. Apa itu Anonymous Functions? Jelaskan dan berikan contohnya!
 
    Jawab: Anonymous Function adalah function tanpa nama, yang digunakan untuk function kecil untuk dipakai satu kali, dan sering digunakan pada callback.
 
-   ```
-   void main() {
+  ```
+  void main() {
   var angka = [1, 2, 3];
   angka.forEach((n) {
     print('Angka: $n');
@@ -483,23 +478,23 @@ Jawab: Sudah Selesai Semua
    a. Lexical Scope memiliki aturan yang sebagaimana variabel diakses berdasarkan lokasi kode.
 
    ```
-   void main() {
-  var x = 10;
-  void tampilX() {
-    print(x); // x bisa diakses karena ada di scope luar
+    void main() {
+    var x = 10;
+    void tampilX() {
+      print(x); // x bisa diakses karena ada di scope luar
     }
-    tampilX();
-  }
-  ```
+      tampilX();
+    }
+   ```
 
    b.Lexical Closure adalah sebuah function yang mengikat variabel dari scope luar, dan bisa menyimpannya bahkan setelah scope luar selesai dieksekusi.
 
   ```
-    Function counter() {
-    var hitung = 0;
-    return () {
-      hitung++;
-      print(hitung);
+  Function counter() {
+  var hitung = 0;
+  return () {
+    hitung++;
+    print(hitung);
     };
   }
 
@@ -515,32 +510,29 @@ Jawab: Sudah Selesai Semua
    Jawab: pemrograman, return multiple value berarti sebuah fungsi mengembalikan lebih dari satu hasil sekaligus. Konsep ini biasanya dilakukan dengan mengemas nilai-nilai tersebut ke dalam satu wadah seperti tuple, list, atau dictionary
 
    ```
-   (String, int, List<String>) profilLengkap() {
-  String nama = 'Cakra Wangsa M.A.W';
-  int umur = 21;
-  List<String> hobi = ['Coding', 'Gaming', 'Membaca'];
+      (String, int, List<String>) profilLengkap() {
+      String nama = 'Cakra Wangsa M.A.W';
+      int umur = 21;
+      List<String> hobi = ['Coding', 'Gaming', 'Membaca'];
+      return (nama, umur, hobi);
+    }
 
-  return (nama, umur, hobi);
-}
-
-void main() {
-  // Destructuring record
-  var (nama, umur, hobi) = profilLengkap();
-
-  print('=== PROFIL ===');
-  print('Nama : $nama');
-  print('Umur : $umur tahun');
-  print('Hobi : ${hobi.join(", ")}');
-
-  if (umur >= 18) {
-    print('Status: Dewasa');
-  } else {
-    print('Status: Belum Dewasa');
-  }
-}
-
-```
+    void main() {
+      // Destructuring record
+      var (nama, umur, hobi) = profilLengkap();
+      print('=== PROFIL ===');
+      print('Nama : $nama');
+      print('Umur : $umur tahun');
+      print('Hobi : ${hobi.join(", ")}');
+      if (umur >= 18) {
+        print('Status: Dewasa');
+      } else {
+        print('Status: Belum Dewasa');
+      }
+    }
+   ```
 
 8. Kumpulkan berupa link commit repo GitHub pada tautan yang telah disediakan di grup Telegram!
 
    Jawab:
+
