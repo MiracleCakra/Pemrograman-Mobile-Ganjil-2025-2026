@@ -176,112 +176,131 @@ Semua Map tersebut kemudian dicetak, sehingga terlihat isi masing-masing sesuai 
 
 # Praktikum 4: Eksperimen Tipe Data List: Spread dan Control-flow Operators
 
-## Langkah 1:
-Ketik atau salin kode program berikut ke dalam fungsi main().
+# Praktikum 4: Eksperimen Tipe Data List: Spread dan Control-flow Operators
 
-Jawab:
+## Langkah 1
+Ketik atau salin kode program berikut ke dalam fungsi `main()`.
 
-[kode program](img/praktikum4_langkah1_week4Mobile.jpg)
+**Jawab:**
 
+![kode program](img/praktikum4_langkah1_week4Mobile.jpg)
 
-## Langkah 2:
+## Langkah 2
 Silakan coba eksekusi (Run) kode pada langkah 1 tersebut. Apa yang terjadi? Jelaskan! Lalu perbaiki jika terjadi error.
 
-Jawab:
+**Jawab:**
 
-[Output kode program](img/outputpraktikum4_langkah1_week4Mobile.jpg.png)
+![Output kode program](img/outputpraktikum4_langkah1_week4Mobile.jpg.png)
 
-Output kode program akan mengalami error dikarenakan pada variabel list1 tidak dideklarasikan, sehingga dart tidak dapat mengenali variabel tersebut.
+Output kode program akan mengalami error dikarenakan pada variabel `list1` tidak dideklarasikan, sehingga Dart tidak dapat mengenali variabel tersebut.
 
-Perbaikan dan Output Kode
+**Perbaikan dan Output Kode**
 
 ![perbaikan kode dan output langkah 1](img/praktikum4_perbaikanlangkah1_week4Mobile.jpg.png)
 
+## Langkah 3
+Tambahkan kode program berikut, lalu coba eksekusi (Run) kode Anda.  
+Apa yang terjadi? Jika terjadi error, silakan perbaiki.
 
-## Langkah 3:
-Tambahkan kode program berikut, lalu coba eksekusi (Run) kode Anda.
-Apa yang terjadi ? Jika terjadi error, silakan perbaiki.
+**Jawab:**
 
-Jawab:
+Output kode akan mengalami error karena `list1` otomatis akan dianggap bertipe `List<int>` (hanya boleh berisi angka), sehingga saat menambahkan `null`, Dart menolak karena tipe `int` tidak mengizinkan nilai kosong (`null`) tanpa adanya tanda tanya `?`.
 
-Output kode akan mengalami error karena list1 otomatis akan dianggap bertipe List<int> (hanya boleh berisi angka), sehingga saat menambahkan null, Dart menolak karena tipe int tidak mengizinkan nilai kosong (null) tanpa adanya tanda tanya ?.
-
-Kode Program
+**Kode Program**
 
 ![kode error](img/praktikum4_langkah3_week4Mobile.jpg)
 
-Output
+**Output**
 
 ![Output error](img/outputpraktikum4_langkah3_week4Mobile.jpg.png)
 
 ---
 
-Perbaikan Kode
+**Perbaikan Kode**
 
-Pada kode ini akan membuat dan memodifikasi list yang dapat berisi nilai null, lalu menggunakan spread (...) dan null-aware spread (...?) untuk menggabungkannya ke list baru agar tidak terjadi error.
+Pada kode ini akan membuat dan memodifikasi list yang dapat berisi nilai `null`, lalu menggunakan spread `(...)` dan null-aware spread `(...?)` untuk menggabungkannya ke list baru agar tidak terjadi error.
 
-Kode Program
+**Kode Program**
 
 ![Perbaikan kode program](img/praktikum4_perbaikanlangkah3_week4Mobile.jpg)
 
-Output
+**Output**
 
 ![Output hasil perbaikan](img/outputpraktikum4_perbaikanlangkah3_week4Mobile.jpg.png)
 
+---
+
 Tambahkan variabel list berisi NIM Anda menggunakan Spread Operators. Dokumentasikan hasilnya dan buat laporannya!
 
-Kode Program
+**Kode Program**
 
 ![Tambah Variabel NIM](img/praktikum4_tambahanNIMlangkah3_week4Mobile.jpg)
 
-Output
+**Output**
 
 ![Output Tambah Variabel NIM](img/outputpraktikum4_tambahNIMlangkah3_week4Mobile.jpg.png)
 
-## Langkah 4:
-Tambahkan kode program berikut, lalu coba eksekusi (Run) kode Anda.
+## Langkah 4
+Tambahkan kode program berikut, lalu coba eksekusi (Run) kode Anda.  
+Apa yang terjadi? Jika terjadi error, silakan perbaiki.  
+Tunjukkan hasilnya jika variabel `promoActive` ketika `true` dan `false`.
 
-Apa yang terjadi ? Jika terjadi error, silakan perbaiki. Tunjukkan hasilnya jika variabel promoActive ketika true dan false.
-Kode Dan Output Program
+**Kode Dan Output Program**
 
 ![kode dan output error](img/praktikum4_langkah4_week4Mobile.jpg.png)
 
-Kode akan mengalami error dikarenakan pada variabel promoActive belum pernah dibuat atau dideklarasikan sebelumnya, sehingga Dart tidak mengenalinya saat kode dijalankan.
+Kode akan mengalami error dikarenakan pada variabel `promoActive` belum pernah dibuat atau dideklarasikan sebelumnya, sehingga Dart tidak mengenalinya saat kode dijalankan.
 
 ---
 
-Perbaikan Kode
+**Perbaikan Kode**
 
-Kode Program
+**Kode Program**
 
 ![Perbaikan Kode](img/praktikum4_perbaikanlangkah4_week4Mobile.jpg)
 
-Output
+**Output**
 
 ![Output Hasil Perbaikan](img/outputpraktikum4_perbaikanlangkah4_week4Mobile.jpg.png)
 
-## Langkah 5:
-Tambahkan kode program berikut, lalu coba eksekusi (Run) kode Anda.
+## Langkah 5
+Tambahkan kode program berikut, lalu coba eksekusi (Run) kode Anda.  
+Apa yang terjadi? Jika terjadi error, silakan perbaiki.  
+Tunjukkan hasilnya jika variabel `login` mempunyai kondisi lain.
 
-Apa yang terjadi ? Jika terjadi error, silakan perbaiki. Tunjukkan hasilnya jika variabel login mempunyai kondisi lain.
+**Kode dan Output Program**
 
-Kode dan Output Program
-
-![Kode Program Error]
 ![Kode dan Output Error](img/praktikum4_langkah5_week4Mobile.jpg.png)
 
-Output akan mengalami error karena variabel login belum pernah dideklarasikan dan penulisan if (login case 'Manager') tidak sesuai sintaks Dart, sehingga program tidak tahu nilai yang dicek dan cara membandingkannya.
-
-Perbaikan Kode
-
-
-
-
-
-## Langkah 6:
-Tambahkan kode program berikut, lalu coba eksekusi (Run) kode Anda.
+Output akan mengalami error karena variabel `login` belum pernah dideklarasikan dan penulisan `if (login case 'Manager')` tidak sesuai sintaks Dart, sehingga program tidak tahu nilai yang dicek dan cara membandingkannya.
 
 ---
 
-Apa yang terjadi ? Jika terjadi error, silakan perbaiki. Jelaskan manfaat Collection For dan dokumentasikan hasilnya.
+### Perbaikan Kode dengan variabel `login` mempunyai kondisi lain
+Pada perbaikan kode akan menampilkan daftar menu navigasi (`nav2`) yang isinya menyesuaikan peran pengguna (`login`):  
+- Semua peran mendapat menu dasar *Home*, *Furniture*, dan *Plants*  
+- **Manager** mendapat tambahan *Inventory* dan *Reports*  
+- **Admin** mendapat *Dashboard* dan *Reports*  
+- **Staff** hanya mendapat *Reports*  
+- `null` atau *Guest* hanya melihat menu dasar  
+
+![Perbaikan langkah 5](img/praktikum4_perbaikanlangkah5_week4Mobile.jpg)
+
+**Output**
+
+![Output perbaikan langkah 5](img/outputpraktikum4_perbaikanlangkah5_week4Mobile.jpg.png)
+
+## Langkah 6
+Tambahkan kode program berikut, lalu coba eksekusi (Run) kode Anda.
+
+**Kode dan Output Program**
+
+![Kode dan Output Program](img/praktikum4_langkah6_week4Mobile.jpg)
+
+Kode tersebut membuat `listOfInts` berisi `[1, 2, 3]`, lalu membentuk `listOfStrings` yang diawali `'#0'` dan dilanjutkan dengan `'#1'`, `'#2'`, `'#3'` melalui **Collection For** dari `listOfInts`; pernyataan `assert` memverifikasi bahwa elemen indeks ke-1 adalah `'#1'` sehingga program berjalan tanpa error.
+
+### Manfaat Collection For
+- Menulis loop langsung di dalam literal list/set/map.
+- Lebih ringkas dan mudah dibaca dibanding membuat list kosong lalu `.add()` satu per satu.
+- Bisa digabung dengan `if` untuk filter data saat membentuk koleksi.
 

@@ -47,20 +47,28 @@
 // }
 
 // Langkah 5
-void main() {
-  // Coba berbagai kondisi login
-  final roles = <String?>[null, 'Guest', 'Staff', 'Manager', 'Admin'];
+// void main() {
+//   // Coba berbagai kondisi login
+//   final roles = <String?>[null, 'Guest', 'Staff', 'Manager', 'Admin'];
 
-  for (final login in roles) {
-    final nav2 = [
-      'Home',
-      'Furniture',
-      'Plants',
-      if (login == 'Manager') 'Inventory',   // hanya Manager
-      if (login == 'Admin') 'Dashboard',     // hanya Admin
-      if (login == 'Staff' || login == 'Manager' || login == 'Admin') 'Reports', // role kerja
-    ];
+//   for (final login in roles) {
+//     final nav2 = [
+//       'Home',
+//       'Furniture',
+//       'Plants',
+//       if (login == 'Manager') 'Inventory',   // hanya Manager
+//       if (login == 'Admin') 'Dashboard',     // hanya Admin
+//       if (login == 'Staff' || login == 'Manager' || login == 'Admin') 'Reports', // role kerja
+//     ];
 
-    print('login: ${login ?? 'null/guest'} -> $nav2');
-  }
+//     print('login: ${login ?? 'null/guest'} -> $nav2');
+//   }
+// }
+
+// Langkah 6
+void main () {
+  var listOfInts = [1, 2, 3];
+  var listOfStrings = ['#0', for (var i in listOfInts) '#$i'];
+  assert(listOfStrings[1] == '#1');
+  print(listOfStrings);
 }
