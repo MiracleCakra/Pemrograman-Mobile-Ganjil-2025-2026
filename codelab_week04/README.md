@@ -362,3 +362,185 @@ Tidak ada error di sini, tapi diminta mengganti salah satu field dengan nama dan
 **Kode dan Output Program**
 
 ![Perbaikan](img/outputpraktikum5_perbaikanlangkah5_week4Mobile.jpg.png)
+
+
+# Tugas Praktikum
+1. Silakan selesaikan Praktikum 1 sampai 5, lalu dokumentasikan berupa screenshot hasil pekerjaan Anda beserta penjelasannya!
+
+Jawab: Sudah Selesai Semua
+
+2. Jelaskan yang dimaksud Functions dalam bahasa Dart!
+   
+   Jawab: Function adalah sebuah blok kode yang dapat dilakukan pemanggilan berulang-ulang untuk dapat menjalankan tugas tertentu. Dengan penggunaan Function kode menjadi lebih terstruktur, mudah dibaca, dan mudah digunakan kembali (reusable).
+
+3. Jelaskan jenis-jenis parameter di Functions beserta contoh sintaksnya!
+
+   Jawab:
+
+   Positional Parameters
+      Definisi: Parameter yang urutannya wajib sesuai saat memanggil fungsi.
+      Ciri: Tidak diberi tanda khusus, dan semua harus diisi sesuai urutan.
+
+      Contoh sintaks
+
+      ```
+        // Positional Parameter
+  main () {
+    void greet(String nama, String masadepan, int umur) {
+      print('Hai aku $nama, dari masadepan $masadepan, umurku $umur tahun');
+    }
+    greet('Sore','untuk membantumu coding!', 21);
+  }
+      ```
+
+    Optional Positional Parameters
+       Definisi: Parameter yang posisinya tetap, tapi sifatnya opsional (boleh tidak diisi).
+       Ciri: Ditulis di dalam tanda [], bisa diberi nilai default.
+
+       ```
+       main () {
+      void sayHello(String nama, [String? pesan]) {
+      print('Halo $nama, ${pesan ?? "tidak ada pesan"}');
+      }
+
+      sayHello('Cakra');
+      sayHello('Cakra', 'Semangat!');
+
+      }
+      ```
+
+    Named Parameters
+        Named Parameters
+        Definisi: Parameter yang dipanggil berdasarkan nama, bukan urutan.
+
+        Ciri: Ditulis di dalam tanda {}, dan saat memanggil fungsi harus menyebutkan nama parameternya.
+
+      ```
+      main () {
+      void buatProfil({required String nama, int Kelas = 0}) {
+      print('Nama: $nama, Kelas: $Kelas');
+      }
+
+      buatProfil(nama: 'Cakra', Kelas: 3);
+      }
+
+      ```
+
+4. Jelaskan maksud Functions sebagai first-class objects beserta contoh sintaknya!
+
+   jawab: function di Dart yang bisa diperlakukan seperti nilai: bisa disimpan dalam variabel, bisa dikirim sebagai parameter ke function lain, bahkan bisa dikembalikan dari function.
+
+   ```
+   void halo(String nama) => print("Halo $nama");
+
+    // Fungsi yang menerima fungsi lain sebagai parameter
+    void jalankan(void Function(String) fungsi, String value) {
+      fungsi(value);
+    }
+
+    // Fungsi yang mengembalikan fungsi lain
+    Function buatPenyapa(String sapaan) {
+      return (String nama) => print("$sapaan, $nama!");
+    }
+
+    void main() {
+      // Simpan fungsi dalam variabel
+      var f = halo;
+      f("Sore");
+
+      // Kirim fungsi sebagai parameter
+      jalankan(halo, "Gunawan");
+
+      // Gunakan fungsi anonim langsung
+      jalankan((nama) => print("Selamat datang $nama"), "Cakra");
+
+      // Simpan fungsi hasil dari fungsi lain
+      var penyapaPagi = buatPenyapa("Selamat pagi");
+      penyapaPagi("Slamet");
+
+      var penyapaMalam = buatPenyapa("Selamat malam");
+      penyapaMalam("Basuki");
+    }
+  ```
+
+5. Apa itu Anonymous Functions? Jelaskan dan berikan contohnya!
+
+   Jawab: Anonymous Function adalah function tanpa nama, yang digunakan untuk function kecil untuk dipakai satu kali, dan sering digunakan pada callback.
+
+   ```
+   void main() {
+  var angka = [1, 2, 3];
+  angka.forEach((n) {
+    print('Angka: $n');
+    });
+  }
+  ```
+   
+6. Jelaskan perbedaan Lexical scope dan Lexical closures! Berikan contohnya!
+
+   Jawab:
+
+   a. Lexical Scope memiliki aturan yang sebagaimana variabel diakses berdasarkan lokasi kode.
+
+   ```
+   void main() {
+  var x = 10;
+  void tampilX() {
+    print(x); // x bisa diakses karena ada di scope luar
+    }
+    tampilX();
+  }
+  ```
+
+   b.Lexical Closure adalah sebuah function yang mengikat variabel dari scope luar, dan bisa menyimpannya bahkan setelah scope luar selesai dieksekusi.
+
+  ```
+    Function counter() {
+    var hitung = 0;
+    return () {
+      hitung++;
+      print(hitung);
+    };
+  }
+
+  void main() {
+    var tambah = counter();
+    tambah(); // 1
+    tambah(); // 2 -> variabel hitung tetap tersimpan
+  }
+  ```
+
+7. Jelaskan dengan contoh cara membuat return multiple value di Functions!
+
+   Jawab: pemrograman, return multiple value berarti sebuah fungsi mengembalikan lebih dari satu hasil sekaligus. Konsep ini biasanya dilakukan dengan mengemas nilai-nilai tersebut ke dalam satu wadah seperti tuple, list, atau dictionary
+
+   ```
+   (String, int, List<String>) profilLengkap() {
+  String nama = 'Cakra Wangsa M.A.W';
+  int umur = 21;
+  List<String> hobi = ['Coding', 'Gaming', 'Membaca'];
+
+  return (nama, umur, hobi);
+}
+
+void main() {
+  // Destructuring record
+  var (nama, umur, hobi) = profilLengkap();
+
+  print('=== PROFIL ===');
+  print('Nama : $nama');
+  print('Umur : $umur tahun');
+  print('Hobi : ${hobi.join(", ")}');
+
+  if (umur >= 18) {
+    print('Status: Dewasa');
+  } else {
+    print('Status: Belum Dewasa');
+  }
+}
+
+```
+
+8. Kumpulkan berupa link commit repo GitHub pada tautan yang telah disediakan di grup Telegram!
+
+   Jawab:
