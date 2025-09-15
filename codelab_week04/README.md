@@ -176,8 +176,6 @@ Semua Map tersebut kemudian dicetak, sehingga terlihat isi masing-masing sesuai 
 
 # Praktikum 4: Eksperimen Tipe Data List: Spread dan Control-flow Operators
 
-# Praktikum 4: Eksperimen Tipe Data List: Spread dan Control-flow Operators
-
 ## Langkah 1
 Ketik atau salin kode program berikut ke dalam fungsi `main()`.
 
