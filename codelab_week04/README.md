@@ -302,3 +302,63 @@ Kode tersebut membuat `listOfInts` berisi `[1, 2, 3]`, lalu membentuk `listOfStr
 - Lebih ringkas dan mudah dibaca dibanding membuat list kosong lalu `.add()` satu per satu.
 - Bisa digabung dengan `if` untuk filter data saat membentuk koleksi.
 
+---
+
+# Praktikum 5: Eksperimen Tipe Data Records
+
+## Langkah 1
+Ketik atau salin kode program berikut ke dalam fungsi `main()`.
+
+**Kode Program**
+
+![Kode Program](img/praktikum5_langkah1_week4Mobile.jpg)
+
+## Langkah 2
+Silakan coba eksekusi (Run) kode pada langkah 1 tersebut. Apa yang terjadi? Jelaskan! Lalu perbaiki jika terjadi error.
+
+![Output Langkah 1](img/outputpraktikum5_langkah2_week4Mobile.jpg.png)
+
+**Jawab:**  
+Pada output menampilkan berupa `record` yang menyimpan data campuran dalam satu variabel menggunakan **Record** Dart: dua *positional field* (`'first'`, `'last'`) dan dua *named field* (`a: 2`, `b: true`). Saat `print(record)` dijalankan, tampil `('first', a: 2, b: true, 'last')`. Struktur ini menggabungkan sifat list (urutan) dan map (nama field) sehingga praktis untuk menyimpan dan mengakses berbagai tipe data secara terstruktur tanpa membuat kelas khusus.
+
+## Langkah 3
+Tambahkan kode program berikut di luar scope `void main()`, lalu coba eksekusi (Run) kode Anda.
+
+**Kode Program**
+
+![Kode fungsi tukar](img/praktikum5_fungsitukarlangkah3_week4Mobile.jpg)
+
+**Output**
+
+![Output fungsi tukar](img/outputpraktikum5_langkah3_week4Mobile.png)
+
+Kode akan mengeluarkan output record `(33, 66)` lalu mencetaknya sebagai kondisi awal. Fungsi `tukar()` menerima record tersebut, memecahnya menjadi variabel `a` dan `b`, kemudian mengembalikan record baru dengan urutan nilai dibalik menjadi `(b, a)`. Hasilnya, output menunjukkan proses pertukaran nilai field di dalam record secara jelas: sebelum `(33, 66)` dan sesudah `(66, 33)`.
+
+## Langkah 4
+Tambahkan kode program berikut di dalam scope `void main()`, lalu coba eksekusi (Run) kode Anda.
+
+![Kode Error](img/praktikum5_langkah4_week4Mobile.jpg.png)
+
+**Jawab:**  
+Error pada kode program disebabkan karena di Dart, variabel dengan tipe non-nullable (seperti `(String, int) mahasiswa`) wajib diberi nilai awal sebelum digunakan. Tetapi pada kode, `mahasiswa` langsung dipanggil di `print()` tanpa diinisialisasi, sehingga Dart menghentikan eksekusi dan menampilkan pesan kesalahan.
+
+### Perbaikan Kode
+
+**Kode dan Output Program**
+
+![Perbaikan Kode](img/outputpraktikum5_perbaikanlangkah4_week4Mobile.jpg.png)
+
+## Langkah 5
+Tambahkan kode program berikut di dalam scope `void main()`, lalu coba eksekusi (Run) kode Anda.
+
+![Kode Program](img/praktikum5_langkah5_week4Mobile.jpg.png)
+
+Tidak ada error di sini, tapi diminta mengganti salah satu field dengan nama dan NIM.
+
+---
+
+**Penambahan Kode**
+
+**Kode dan Output Program**
+
+![Perbaikan](img/outputpraktikum5_perbaikanlangkah5_week4Mobile.jpg.png)
