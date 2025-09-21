@@ -85,3 +85,88 @@ Kemudian lakukan **push** ke repository Anda.
 ![Hello World](img/praktikum3_langkah12_week05mobile.jpg.png)
 
 > **Perhatian:** Lakukan proses screenshot seperti pada Langkah 12 untuk setiap Laporan Praktikum yang akan Anda buat pada praktikum selanjutnya hingga pertemuan project final.
+
+---
+
+# Praktikum 4: Menerapkan Widget Dasar
+
+## Selesaikan langkah-langkah praktikum berikut ini dengan melanjutkan dari praktikum sebelumnya.
+
+---
+
+### Langkah 1: Text Widget
+
+Buat folder baru `basic_widgets` di dalam folder `lib`.
+Kemudian buat file baru di dalam `basic_widgets` dengan nama `text_widget.dart`.
+Ketik atau salin kode program berikut ke project `hello_world` Anda pada file `text_widget.dart`.
+
+> **Perhatian:** Gantilah teks **Fulan** dengan **nama lengkap Anda**.
+
+#### Kode Program
+
+```dart
+import 'package:flutter/material.dart';
+
+class MyTextWidget extends StatelessWidget {
+  const MyTextWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      "Nama saya Cakra Wangsa M.A.W, sedang belajar Pemrograman Mobile",
+      style: TextStyle(color: Colors.red, fontSize: 14),
+      textAlign: TextAlign.center,
+    );
+  }
+}
+```
+
+#### Output
+
+![menampilkan tulisan default](img/praktikum4_langkah1_week05mobile.jpg.png)
+
+---
+
+### Langkah 2: Image Widget
+Buat sebuah file image_widget.dart di dalam folder basic_widgets dengan isi kode berikut.
+
+#### Kode Program
+
+```dart
+import 'package:flutter/material.dart';
+
+class MyImageWidget extends StatelessWidget {
+  const MyImageWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Image(
+      image: AssetImage("assets/Logo-Politeknik-Negeri-Malang.png"),
+      width: 400,
+      height: 400,
+      fit: BoxFit.cover,
+    );
+  }
+}
+```
+---
+
+Lakukan penyesuaian asset pada file pubspec.yaml dan tambahkan file logo Anda di folder assets project hello_world.
+
+```dart
+flutter:
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  assets:
+    - assets/
+```
+---
+
+Jangan lupa sesuaikan kode dan import di file main.dart kemudian akan tampil gambar seperti berikut.
+
+#### Output
+
+![menampilkan logo polinema](img/praktikum4_langkah2_week05mobile.jpg.png)

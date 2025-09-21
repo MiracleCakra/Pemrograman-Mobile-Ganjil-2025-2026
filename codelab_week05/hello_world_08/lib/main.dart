@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world_08/basic_widgets/text_widget.dart';
+import 'package:hello_world_08/basic_widgets/image_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -128,15 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
 mainAxisAlignment: MainAxisAlignment.center,
 children: <Widget>[
-  const Text(
-    'KELAS TI-3G ABSEN:',
-    style: TextStyle(
-      fontSize: 20,
-      fontWeight: FontWeight.w600,
-      letterSpacing: 1.5,
-      color: Colors.deepPurple,
-    ),
-  ),
+  const MyImageWidget(),
   const SizedBox(height: 12),
   AnimatedSwitcher(
     duration: const Duration(milliseconds: 400),
