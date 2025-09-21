@@ -10,28 +10,52 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+return MaterialApp(
+  debugShowCheckedModeBanner: false,
+  theme: ThemeData(
+    useMaterial3: true,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: const Color.fromARGB(255, 75, 2, 201),
+      brightness: Brightness.light,
+    ),
+    textTheme: const TextTheme(
+      headlineLarge: TextStyle(
+        fontFamily: 'Poppins',
+        fontWeight: FontWeight.bold,
+        letterSpacing: 1.2,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+      bodyMedium: TextStyle(
+        fontFamily: 'Poppins',
+        fontSize: 16,
+      ),
+    ),
+    appBarTheme: const AppBarTheme(
+      centerTitle: true,
+      elevation: 4,
+      shadowColor: Colors.black26,
+      titleTextStyle: TextStyle(
+        fontFamily: 'Poppins',
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
+      ),
+      backgroundColor: Color.fromARGB(255, 75, 2, 201),
+    ),
+      cardTheme: CardThemeData(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        elevation: 4,
+        shadowColor: Colors.black26,
+      ),
+      buttonTheme: const ButtonThemeData(
+        shape: StadiumBorder(),
+      ),
+    ),
+    home: const MyHomePage(
+      title: 'Flutter Cakra Wangsa May Ahmad Widodo',
+    ),
+  );
   }
 }
 
@@ -102,21 +126,53 @@ class _MyHomePageState extends State<MyHomePage> {
           // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
           // action in the IDE, or press "p" in the console), to see the
           // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+mainAxisAlignment: MainAxisAlignment.center,
+children: <Widget>[
+  const Text(
+    'KELAS TI-3G ABSEN:',
+    style: TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 1.5,
+      color: Colors.deepPurple,
+    ),
+  ),
+  const SizedBox(height: 12),
+  AnimatedSwitcher(
+    duration: const Duration(milliseconds: 400),
+    transitionBuilder: (Widget child, Animation<double> animation) {
+      return ScaleTransition(scale: animation, child: child);
+    },
+    child: Text(
+      '$_counter',
+      key: ValueKey<int>(_counter),
+      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+            fontSize: 48,
+            fontWeight: FontWeight.bold,
+            color: Colors.deepPurpleAccent,
+            shadows: [
+              Shadow(
+                blurRadius: 8,
+                color: Colors.black26,
+                offset: Offset(2, 2),
+              ),
+            ],
+          ),
+    ),
+  ),
+],
+),
+),
+floatingActionButton: FloatingActionButton.extended(
+  onPressed: _incrementCounter,
+  tooltip: 'Tambah Absen',
+  icon: const Icon(Icons.add),
+  label: const Text('Tambah'),
+  backgroundColor: Colors.deepPurple,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(12),
+  ),
+),
     );
   }
 }
