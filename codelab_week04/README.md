@@ -1,10 +1,13 @@
 <p align="center">
-  <img src="https://3.bp.blogspot.com/-whSxEvHuEds/VOBUC7I5NNI/AAAAAAAAAUY/qfk23ch5o_c/s1600/logo_polinema_by_adminkerapolinema-d3b0ojd.jpg" alt="Logo Polinema" width="150">
+  <img src="https://dianisa.com/wp-content/uploads/2024/05/Logo-Politeknik-Negeri-Malang-Dianisa.com_.png" 
+     alt="Logo Polinema" 
+     width="150">
 </p>
 
 <h1 align="center">LAPORAN PRAKTIKUM</h1>
-<h2 align="center">JOBSHEET 03</h2>
-<h3 align="center">Pengantar Dasar Dart-Bag.3 (Collections and Functions)</h3>
+<h2 align="center">JOBSHEET 04</h2>
+<h3 align="center">MINGGU 4</h3>
+<h4 align="center">Pengantar Dasar Dart-Bag.3 (Collections and Functions)</h4>
 
 ---
 
