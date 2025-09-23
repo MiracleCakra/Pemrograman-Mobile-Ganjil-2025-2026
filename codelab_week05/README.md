@@ -46,7 +46,7 @@ Jl. Soekarno Hatta No.9, Jatimulyo, Kec. Lowokwaru, Kota Malang, Jawa Timur 6514
 Selesaikan langkah-langkah praktikum berikut ini menggunakan editor Visual Studio Code (VS Code), Android Studio, atau code editor lain kesukaan Anda.
 
 ### Langkah 4
-Jika sudah selesai proses pembuatan project baru, pastikan tampilan seperti berikut.  
+Jika sudah selesai proses pembuatan project baru, pastikan tampilan seperti berikut.
 Pesan akan tampil berupa **"Your Flutter Project is ready!"** yang artinya Anda telah berhasil membuat project Flutter baru.
 
 ![Langkah 4](img/praktikum1_langkah4_week05mobile.jpg.png)
@@ -59,6 +59,18 @@ Melanjutkan dari praktikum 1, Anda diminta untuk menjalankan aplikasi ke perangk
 Silakan ikuti langkah-langkah pada codelab berikut:
 
 [Basic Android Kotlin Compose - Connect Device](https://developer.android.com/codelabs/basic-android-kotlin-compose-connect-device?hl=id#0)
+
+### Memilih device, menggunakan perangkat fisik (Realme 5 PRO):
+
+![penggunaan device](img/praktikum2_langkah1_week05mobile.jpg.png)
+
+### Gambar Pembuktian sudah tersambung handphone
+
+![pembuktian](img/praktikum2_langkahpembuktian_week4Mobile.jpg)
+
+### Hasil run dari android
+
+![pembuktian.2](img/praktikum2_langkahpembuktian.2_week4Mobile.jpg)
 
 ---
 
@@ -244,7 +256,6 @@ class FabWidget extends StatelessWidget {
 
 ### Langkah 3: Scaffold Widget
 Scaffold widget digunakan untuk mengatur tata letak sesuai dengan material design.
-
 Ubah isi kode main.dart seperti berikut.
 
 ```dart
@@ -381,3 +392,359 @@ class FabWidget extends StatelessWidget {
 
 ### Output
 
+![langkah2](img/praktikum5_langkah2_week05mobile.jpg.png)
+
+
+## Langkah 3: Scaffold Widget
+
+Scaffold widget digunakan untuk mengatur tata letak sesuai dengan material design.
+
+Ubah isi kode main.dart seperti berikut.
+
+### Kode Program
+
+```dart
+// Langkah 3 Praktikum 5 week 05
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+      ),
+      home: const MyHomePage(title: 'My Increment App'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          height: 50.0,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment Counter',
+        child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
+  }
+}
+```
+
+### Output
+
+![langkah3](img/praktikum5_langkah3_week05mobile.jpg.png)
+
+## Langkah 4: Dialog Widget
+
+Dialog widget pada flutter memiliki dua jenis dialog yaitu AlertDialog dan SimpleDialog.
+
+Ubah isi kode main.dart seperti berikut.
+
+### Kode Program
+
+```dart
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: Scaffold(
+        body: MyLayout(),
+      ),
+    );
+  }
+}
+
+class MyLayout extends StatelessWidget {
+  const MyLayout({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+        child: const Text('Show alert'),
+        onPressed: () {
+          showAlertDialog(context);
+        },
+      ),
+    );
+  }
+}
+
+showAlertDialog(BuildContext context) {
+  // set up the button
+  Widget okButton = TextButton(
+    child: const Text("OK"),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: const Text("My title"),
+    content: const Text("This is my message."),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+```
+
+### Output
+
+![langkah 4](img/praktikum5_langkah4_week05mobile.jpg.png)
+
+## Langkah 5: Input dan Selection Widget
+Flutter menyediakan widget yang dapat menerima input dari pengguna aplikasi yaitu antara lain Checkbox, Date and Time Pickers, Radio Button, Slider, Switch, TextField.
+
+Contoh penggunaan TextField widget adalah sebagai berikut:
+
+### Kode Program
+
+```dart
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: const Text("Contoh TextField")),
+        body: const TextField(
+          obscureText: false,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Nama',
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+### Output
+
+[langkah 5](img/praktikum5_langkah5_week05mobile.jpg.png)
+
+## Langkah 6: Date and Time Pickers
+Date and Time Pickers termasuk pada kategori input dan selection widget, berikut adalah contoh penggunaan Date and Time Pickers.
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // untuk format tanggal
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Contoh Date Picker',
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.redAccent),
+        textTheme: const TextTheme(
+          headlineMedium: TextStyle(
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+            color: Colors.redAccent,
+          ),
+          bodyMedium: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 16,
+          ),
+        ),
+      ),
+      home: const MyHomePage(title: 'Contoh Date Picker'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+      builder: (context, child) {
+        // Membuat date picker lebih cantik
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Colors.redAccent, // warna header & tombol
+              onPrimary: Colors.white, // warna teks di header
+              onSurface: Colors.black, // warna teks tanggal
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.redAccent, // warna tombol CANCEL/OK
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    String formattedDate = DateFormat('EEEE, dd MMMM yyyy', 'id_ID').format(selectedDate);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor: Colors.redAccent,
+        centerTitle: true,
+        elevation: 4,
+      ),
+      body: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.white, Color(0xFFFFE5E5)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Icon(Icons.calendar_month, size: 80, color: Colors.redAccent),
+            const SizedBox(height: 16),
+            Text(
+              formattedDate,
+              style: Theme.of(context).textTheme.headlineMedium,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton.icon(
+              onPressed: () => _selectDate(context),
+              icon: const Icon(Icons.date_range),
+              label: const Text('Pilih Tanggal'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.redAccent,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+### Output
+
+![langkah 6](img/praktikum5_langkah6_week05mobile.jpg.png)
+
+Tugas Praktikum
+
+1. Selesaikan Praktikum 1 sampai 5, lalu dokumentasikan dan push ke repository Anda berupa screenshot setiap hasil pekerjaan beserta penjelasannya di file README.md.
+
+    DONE
+
+2. Selesaikan Praktikum 2 dan Anda wajib menjalankan aplikasi hello_world pada perangkat fisik (device Android/iOS) agar Anda mempunyai pengalaman untuk menghubungkan ke perangkat fisik. Capture hasil aplikasi di perangkat, lalu buatlah laporan praktikum pada file README.md.
+
+    ![connect hp](img/praktikum2_langkahpembuktian.2_week4Mobile.jpg)
+
+3. Pada Praktikum 5 mulai dari Langkah 3 sampai 6, buatlah file widget tersendiri di folder basic_widgets, kemudian pada file main.dart cukup melakukan import widget sesuai masing-masing langkah tersebut.
+
+    ![basic widget](img/basic_widget.png)
+
+4. Selesaikan Codelabs: Your first Flutter app, lalu buatlah laporan praktikumnya dan push ke repository GitHub Anda.
+
+5. README.md berisi: capture hasil akhir tiap praktikum (side-by-side, bisa juga berupa file GIF agar terlihat proses perubahan ketika ada aksi dari pengguna) dengan menampilkan NIM dan Nama Anda sebagai ciri pekerjaan Anda.
+
+6. Kumpulkan berupa link repository/commit GitHub Anda kepada dosen yang telah disepakati!
