@@ -588,7 +588,7 @@ class MyApp extends StatelessWidget {
 
 ### Output
 
-[langkah 5](img/praktikum5_langkah5_week05mobile.jpg.png)
+![langkah 5](img/praktikum5_langkah5_week05mobile.jpg.png)
 
 ## Langkah 6: Date and Time Pickers
 Date and Time Pickers termasuk pada kategori input dan selection widget, berikut adalah contoh penggunaan Date and Time Pickers.
