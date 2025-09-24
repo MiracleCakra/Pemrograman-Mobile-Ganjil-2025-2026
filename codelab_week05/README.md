@@ -729,6 +729,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ![langkah 6](img/praktikum5_langkah6_week05mobile.jpg.png)
 
+## CODELAB TUGAS PRAKTIKUM (YOUR FIRST FLUTTER)
+
+### Selesaikan Codelabs: Your first Flutter app, lalu buatlah laporan praktikumnya dan push ke repository GitHub Anda.
+
+#### OUTPUT HASIL
+
+![HASIL FIRST FLUTTER](img/codelab_yourflutter.png)
+
+---
+
+![HASIL FIRST FLUTTER](img/codelab_yourflutter1.png)
+
+---
+
+![HASIL FIRST FLUTTER](img/codelab_yourflutter2.png)
+
 Tugas Praktikum
 
 1. Selesaikan Praktikum 1 sampai 5, lalu dokumentasikan dan push ke repository Anda berupa screenshot setiap hasil pekerjaan beserta penjelasannya di file README.md.
@@ -748,3 +764,4 @@ Tugas Praktikum
 5. README.md berisi: capture hasil akhir tiap praktikum (side-by-side, bisa juga berupa file GIF agar terlihat proses perubahan ketika ada aksi dari pengguna) dengan menampilkan NIM dan Nama Anda sebagai ciri pekerjaan Anda.
 
 6. Kumpulkan berupa link repository/commit GitHub Anda kepada dosen yang telah disepakati!
+
