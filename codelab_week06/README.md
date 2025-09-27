@@ -284,3 +284,14 @@ BoxFit.cover memberi tahu kerangka kerja bahwa gambar harus sekecil mungkin teta
 Pada langkah terakhir ini, atur semua elemen dalam ListView, bukan Column, karena ListView mendukung scroll yang dinamis saat aplikasi dijalankan pada perangkat yang resolusinya lebih kecil.
 
 ![ListView](img/praktikum4_langkah3_week06mobile.jpg.png)
+
+# Tugas Praktikum 1
+
+1. Selesaikan Praktikum 1 sampai 4, lalu dokumentasikan dan push ke repository Anda berupa screenshot setiap hasil pekerjaan beserta penjelasannya di file README.md!
+
+2. Silakan implementasikan di project baru "basic_layout_flutter" dengan mengakses sumber ini: https://docs.flutter.dev/codelabs/layout-basics
+
+3. Kumpulkan link commit repository GitHub Anda kepada dosen yang telah disepakati!
+
+# Praktikum 5: Membangun Navigasi di Flutter
+
