@@ -252,3 +252,15 @@ Widget buttonSection = Row(
 Tambahkan variabel buttonSection ke dalam body seperti berikut:
 
 ![button section](img/praktikum2_langkah3_week06mobile.jpg.png)
+
+# Praktikum 3: Implementasi text section
+
+## Langkah 1: Buat widget textSection
+Tentukan bagian teks sebagai variabel. Masukkan teks ke dalam Container dan tambahkan padding di sepanjang setiap tepinya. Tambahkan kode berikut tepat di bawah deklarasi buttonSection:
+
+![widgettextSection](img/praktikum3_langkah1_week06mobile.jpg.png)
+
+## Langkah 2: Tambahkan variabel text section ke body
+Tambahkan widget variabel textSection ke dalam body seperti berikut:
+
+![text section](img/praktikum3_langkah2_week06mobile.jpg.png)

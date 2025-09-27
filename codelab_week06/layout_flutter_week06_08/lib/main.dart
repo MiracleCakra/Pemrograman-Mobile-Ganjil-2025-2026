@@ -118,20 +118,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ===== titleSection =====
     final Widget titleSection = Container(
       padding: const EdgeInsets.all(32),
       child: Row(
         children: [
           Expanded(
-            // Kolom kiri judul
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Teks judul dengan padding bawah
                 Container(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: const Text(
-                    'Jatim Park 1',
+                    'jatim Park 1',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -149,9 +148,8 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    // buttonSection (ditambahkan tepat di bawah titleSection)
+    // ===== buttonSection =====
     final Color color = Theme.of(context).primaryColor;
-
     final Widget buttonSection = Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -161,24 +159,38 @@ class MyApp extends StatelessWidget {
       ],
     );
 
+    // ===== textSection =====
+    final Widget textSection = Container(
+      padding: const EdgeInsets.all(32),
+      child: const Text(
+        'Jatim Park 1 adalah salah satu destinasi wisata edukasi dan rekreasi '
+        'terpopuler di Kota Batu, Malang. Tempat ini menawarkan berbagai wahana '
+        'permainan seru, museum interaktif, serta taman edukasi yang cocok untuk '
+        'keluarga dan pelajar. Dengan pemandangan pegunungan yang sejuk, Jatim Park 1 '
+        'menjadi pilihan tepat untuk belajar sambil berlibur. '
+        '\n\nNama: Cakra Wangsa M.A.W \nNIM: 2341720032',
+        softWrap: true,
+      ),
+    );
+
+
     return MaterialApp(
-      title: 'Flutter layout Demo: Cakra Wangsa M.A.W - 2341720032',
+      title: 'Flutter layout: Cakra Wangsa M.A.W - 2341720032',
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Cakra Wangsa M.A.W - 2341720032'),
         ),
-        // Tampilkan keduanya
-          body: Column(
-            children: [
-              titleSection,
-              buttonSection,
-            ],
-          ),
+        body: Column(
+          children: [
+            titleSection,
+            buttonSection,
+            textSection,
+          ],
+        ),
       ),
     );
   }
 
-  // Helper: ikon di atas teks, teks dalam Container dengan margin-top
   Column _buildButtonColumn(Color color, IconData icon, String label) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -201,7 +213,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// (Opsional) Masih ada contoh counter; tidak dipakai di halaman utama.
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
