@@ -118,26 +118,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget titleSection = Container(
-      padding: const EdgeInsets.all(32), // padding 32 di semua sisi
+    final Widget titleSection = Container(
+      padding: const EdgeInsets.all(32),
       child: Row(
         children: [
           Expanded(
-            // soal 1: Column di dalam Expanded + crossAxisAlignment.start
+            // Kolom kiri judul
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // soal 2: baris pertama di dalam Container dengan bottom padding 8
+                // Teks judul dengan padding bawah
                 Container(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: const Text(
-                    'Jawa Timur Park 1',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    'Jatim Park 1',
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
-                // soal 2: baris kedua warna abu-abu
                 const Text(
                   'Batu, Malang, Indonesia',
                   style: TextStyle(color: Colors.grey),
@@ -145,7 +142,6 @@ class MyApp extends StatelessWidget {
               ],
             ),
           ),
-          // soal 3: ikon bintang merah + teks "41"
           const Icon(Icons.star, color: Colors.red),
           const SizedBox(width: 8),
           const Text('4.1'),
@@ -153,22 +149,61 @@ class MyApp extends StatelessWidget {
       ),
     );
 
+    // buttonSection (ditambahkan tepat di bawah titleSection)
+    final Color color = Theme.of(context).primaryColor;
+
+    final Widget buttonSection = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _buildButtonColumn(color, Icons.call, 'CALL'),
+        _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
+        _buildButtonColumn(color, Icons.share, 'SHARE'),
+      ],
+    );
+
     return MaterialApp(
-      title: 'Flutter layout: Cakra Wangsa M.A.W - 2341720032',
+      title: 'Flutter layout Demo: Cakra Wangsa M.A.W - 2341720032',
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Cakra Wangsa M.A.W - 2341720032'),
         ),
-        // Ganti 'Hello World' dengan titleSection
-        body: titleSection,
+        // Tampilkan keduanya
+          body: Column(
+            children: [
+              titleSection,
+              buttonSection,
+            ],
+          ),
       ),
+    );
+  }
+
+  // Helper: ikon di atas teks, teks dalam Container dengan margin-top
+  Column _buildButtonColumn(Color color, IconData icon, String label) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon, color: color),
+        Container(
+          margin: const EdgeInsets.only(top: 8),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: color,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
 
+// (Opsional) Masih ada contoh counter; tidak dipakai di halaman utama.
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-
   final String title;
 
   @override
@@ -177,34 +212,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  void _incrementCounter() => setState(() => _counter++);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
+      appBar: AppBar(title: Text(widget.title)),
+      body: Center(child: Text('$_counter', style: Theme.of(context).textTheme.headlineMedium)),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
-        tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
     );
