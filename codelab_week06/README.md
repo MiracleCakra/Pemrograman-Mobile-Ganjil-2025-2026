@@ -38,3 +38,147 @@ Jl. Soekarno Hatta No.9, Jatimulyo, Kec. Lowokwaru, Kota Malang, Jawa Timur 6514
 </div>
 
 ---
+
+#  Praktikum 1: Membangun Layout di Flutter
+
+## Langkah 1: Buat Project Baru
+Buatlah sebuah project flutter baru dengan nama layout_flutter. Atau sesuaikan style laporan praktikum yang Anda buat.
+
+![project baru](img/praktikum1_langkah1_week06mobile.jpg.png)
+
+## Langkah 2: Buka file lib/main.dart
+Buka file main.dart lalu ganti dengan kode berikut. Isi nama dan NIM Anda di text title.
+
+![nama dan nim](img/praktikum1_langkah2_week06mobile.jpg.png)
+
+# Langkah 3: Identifikasi Layout Diagram
+
+## Elemen besar (top-down)
+
+* Root: `ListView` (bertindak sebagai kolom vertikal)
+  1. `Image` (header, `height: 240`, `fit: BoxFit.cover`)
+  2. **Title section** → `Padding(16)` → `Row(...)`
+  3. **Button section** → `Padding(h:24, v:8)` → `Row(...)`
+  4. **Text section** → `Padding(24)` → `Text(_desc)`
+
+---
+
+### 1. Identifikasi baris & kolom
+
+**Title section** = `Row` (3 anak):
+  * `Expanded(Column)` menghasilkan 2 teks:
+  * Judul: `Text('Oeschinen Lake Campground', bold)`
+  * Subjudul: `Text('Kandersteg, Switzerland', color: black54)`
+  * `Icon(Icons.star, color: red)`
+  * `Text('41')`
+  * disini `Expanded` membuat kolom teks dengan mengambil sisa ruang sehingga ikon bintang dan angka terdorong ke kanan.
+
+**Button section** = `Row` (3 anak):
+  * Masing-masing row (anak) adalah `Column(mainAxisSize: min)` yang berisi:
+  * `Icon(...)` (berwarna **primary/blue**)
+  * `SizedBox(height: 8)`
+  * `Text(label, color: primary, fontWeight: w600)`
+  * menggunakan `mainAxisAlignment: spaceEvenly` agar ketiganya dapat tersebar rata.
+
+---
+
+### 2. Apakah menyertakan grid?
+
+  **Tidak.** Karena Tidak ada `GridView`; dan hanya kombinasi `Row` + `Column`.
+
+---
+
+### 3. Apakah ada elemen tumpang tindih?
+
+**Tidak.** Tidak ada `Stack/Positioned`, jadi tidak ada tumpah tindih pada elemen.
+
+---
+
+### 4. Apakah UI memerlukan tab?
+
+**Tidak.** karena tidak menggunakan `TabBar/TabBarView`.
+
+---
+
+### 5. Alignment, padding, borders
+
+**Alignment**
+* Title: `crossAxisAlignment: CrossAxisAlignment.start` pada kolom teks; `Expanded` menekan ikon bintang dan angka ke sisi kanan baris.
+* Buttons: `mainAxisAlignment: MainAxisAlignment.spaceEvenly` pada `Row`.
+
+**Padding**
+  * Title: `EdgeInsets.all(16)`
+  * Buttons: `EdgeInsets.symmetric(horizontal: 24, vertical: 8)`
+  * Text: `EdgeInsets.all(24)`
+
+**Borders**
+  * **Tidak ada** border/kartu. (Jika diperlukan styling, bisa bungkus dengan `Card` atau `Container(decoration: BoxDecoration(...))`.)
+
+---
+
+![Membuat Widget](img/praktikum1_langkah3_week06mobile.jpg.png)
+
+## Langkah 4: Implementasi title row
+Pertama, Anda akan membuat kolom bagian kiri pada judul. Tambahkan kode berikut di bagian atas metode build() di dalam kelas MyApp:
+
+1. Letakkan widget Column di dalam widget Expanded agar menyesuaikan ruang yang tersisa di dalam widget Row. Tambahkan properti crossAxisAlignment ke CrossAxisAlignment.start sehingga posisi kolom berada di awal baris.
+
+    ```dart
+    Expanded(
+    // soal 1: Column di dalam Expanded + crossAxisAlignment.start
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+    ```
+
+2. Letakkan baris pertama teks di dalam Container sehingga memungkinkan Anda untuk menambahkan padding = 8. Teks ‘Batu, Malang, Indonesia' di dalam Column, set warna menjadi abu-abu.
+
+    ```dart
+    // soal 2: baris pertama di dalam Container dengan bottom padding 8
+    Container(
+    padding: const EdgeInsets.only(bottom: 8),
+    child: const Text(
+      'Jawa Timur Park 1',
+        style: TextStyle(
+        fontWeight: FontWeight.bold,
+              ),
+            ),
+        ),
+    // soal 2: baris kedua warna abu-abu
+    const Text(
+    'Batu, Malang, Indonesia',
+    style: TextStyle(color: Colors.grey),
+            ),
+          ],
+        ),
+      ),
+    ```
+
+
+3. Dua item terakhir di baris judul adalah ikon bintang, set dengan warna merah, dan teks "41". Seluruh baris ada di dalam Container dan beri padding di sepanjang setiap tepinya sebesar 32 piksel. Kemudian ganti isi body text ‘Hello World' dengan variabel titleSection seperti berikut:
+
+    ```dart
+    // soal 3: ikon bintang merah + teks "41"
+              const Icon(Icons.star, color: Colors.red),
+              const SizedBox(width: 8),
+              const Text('4.1'),
+            ],
+          ),
+        );
+
+        return MaterialApp(
+          title: 'Flutter layout: Cakra Wangsa M.A.W - 2341720032',
+          home: Scaffold(
+            appBar: AppBar(
+              title: const Text('Cakra Wangsa M.A.W - 2341720032'),
+            ),
+            // Ganti 'Hello World' dengan titleSection
+            body: titleSection,
+          ),
+        );
+      }
+    }
+    ```
+
+![langkah 4 default](img/praktikum1_langkah4_week06mobile.jpg.png)
+

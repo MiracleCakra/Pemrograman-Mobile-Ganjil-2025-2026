@@ -1,51 +1,173 @@
+// Praktikum 1, Langkah 3: Identifikasi layout diagram
+
+// import 'package:flutter/material.dart';
+
+// void main() => runApp(const MyApp());
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Flutter layout: Cakra Wangsa M.A.W - 2341720032',
+//       debugShowCheckedModeBanner: false,
+//       theme: ThemeData(
+//         colorSchemeSeed: Colors.lightBlueAccent,
+//         useMaterial3: true,
+//       ),
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: const Text('Cakra Wangsa M.A.W - 2341720032'),
+//         ),
+//         body: const LakeLayout(),
+//       ),
+//     );
+//   }
+// }
+
+// class LakeLayout extends StatelessWidget {
+//   const LakeLayout({super.key});
+
+//   static const String _desc =
+//       'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese Alps. '
+//       'Situated 1,578 meters above sea level, it is one of the larger Alpine Lakes. '
+//       'A gondola ride from Kandersteg, followed by a half-hour walk through pastures '
+//       'and pine forest, leads you to the lake, which warms to 20 degrees Celsius '
+//       'in the summer. Activities enjoyed here include rowing, and riding the summer toboggan run.';
+
+//    Column _buildButton(IconData icon, String label, Color color) {
+//     return Column(
+//       mainAxisSize: MainAxisSize.min,
+//       children: [
+//         Icon(icon, color: color),
+//         const SizedBox(height: 8),
+//         Text(label, style: TextStyle(color: color, fontWeight: FontWeight.w600)),
+//       ],
+//     );
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final primary = Theme.of(context).colorScheme.primary;
+
+//     final topImage = Image.network(
+//       'https://raw.githubusercontent.com/flutter/website/main/examples/layout/lakes/step5/images/lake.jpg',
+//       height: 240, width: double.infinity, fit: BoxFit.cover,
+//     );
+
+//     final titleSection = Padding(
+//       padding: const EdgeInsets.all(16),
+//       child: Row(
+//         children: [
+//           const Expanded(
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Text('Oeschinen Lake Campground', style: TextStyle(fontWeight: FontWeight.bold)),
+//                 SizedBox(height: 8),
+//                 Text('Kandersteg, Switzerland', style: TextStyle(color: Colors.black54)),
+//               ],
+//             ),
+//           ),
+//           const Icon(Icons.star, color: Colors.red),
+//           const SizedBox(width: 4),
+//           const Text('41'),
+//         ],
+//       ),
+//     );
+
+//     // >>> Ini yang tadi hilang/berubah nama <<<
+//     final buttonSection = Padding(
+//       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//         children: [
+//           _buildButton(Icons.call, 'CALL', Color( 0xFF2196F3)),
+//           _buildButton(Icons.near_me, 'ROUTE', Color(0xFF2196F3)),
+//           _buildButton(Icons.share, 'SHARE', Color(0xFF2196F3)),
+//         ],
+//       ),
+//     );
+
+//     final textSection = const Padding(
+//       padding: EdgeInsets.all(24),
+//       child: Text(_desc, softWrap: true),
+//     );
+
+//     return ListView(
+//       children: [
+//         topImage,
+//         titleSection,
+//         buttonSection, // sekarang terdefinisi
+//         textSection,
+//       ],
+//     );
+//   }
+// }
+
+
+// Langkah 4: Implementasi title row
+
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    Widget titleSection = Container(
+      padding: const EdgeInsets.all(32), // padding 32 di semua sisi
+      child: Row(
+        children: [
+          Expanded(
+            // soal 1: Column di dalam Expanded + crossAxisAlignment.start
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // soal 2: baris pertama di dalam Container dengan bottom padding 8
+                Container(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: const Text(
+                    'Jawa Timur Park 1',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                // soal 2: baris kedua warna abu-abu
+                const Text(
+                  'Batu, Malang, Indonesia',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ],
+            ),
+          ),
+          // soal 3: ikon bintang merah + teks "41"
+          const Icon(Icons.star, color: Colors.red),
+          const SizedBox(width: 8),
+          const Text('4.1'),
+        ],
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+
+    return MaterialApp(
+      title: 'Flutter layout: Cakra Wangsa M.A.W - 2341720032',
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Cakra Wangsa M.A.W - 2341720032'),
+        ),
+        // Ganti 'Hello World' dengan titleSection
+        body: titleSection,
+      ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -58,50 +180,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
       _counter++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text('You have pushed the button this many times:'),
@@ -116,7 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
