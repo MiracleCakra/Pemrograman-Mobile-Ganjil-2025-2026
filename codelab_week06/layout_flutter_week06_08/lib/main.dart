@@ -163,11 +163,7 @@ class MyApp extends StatelessWidget {
     final Widget textSection = Container(
       padding: const EdgeInsets.all(32),
       child: const Text(
-        'Jatim Park 1 adalah salah satu destinasi wisata edukasi dan rekreasi '
-        'terpopuler di Kota Batu, Malang. Tempat ini menawarkan berbagai wahana '
-        'permainan seru, museum interaktif, serta taman edukasi yang cocok untuk '
-        'keluarga dan pelajar. Dengan pemandangan pegunungan yang sejuk, Jatim Park 1 '
-        'menjadi pilihan tepat untuk belajar sambil berlibur. '
+        'Jatim Park 1 di Kota Batu, Malang, menghadirkan wahana permainan, museum interaktif, dan taman edukasi dengan suasana pegunungan sejuk tempat ideal untuk rekreasi sekaligus belajar.'
         '\n\nNama: Cakra Wangsa M.A.W \nNIM: 2341720032',
         softWrap: true,
       ),
@@ -180,8 +176,14 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Cakra Wangsa M.A.W - 2341720032'),
         ),
-        body: Column(
+        body: ListView(
           children: [
+            Image.asset(
+              'assets/images/jatimpark1.jpg',
+              width: 600,
+              height: 240,
+              fit: BoxFit.cover,
+            ),
             titleSection,
             buttonSection,
             textSection,
