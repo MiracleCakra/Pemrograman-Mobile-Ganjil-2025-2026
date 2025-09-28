@@ -306,6 +306,307 @@ Pada langkah terakhir ini, atur semua elemen dalam ListView, bukan Column, karen
 
 2. Silakan implementasikan di project baru "basic_layout_flutter" dengan mengakses sumber ini: https://docs.flutter.dev/codelabs/layout-basics
 
+### Penggunaan Widget
+Flutter bekerja dengan prinsip dasar menyusun antarmuka (UI) dari potongan-potongan kecil yang disebut widget. Widget ini bisa digabungkan seperti balok balok hingga membentuk tampilan aplikasi yang utuh.
+
+pada kode dibawah menunjukkan mengenai struktur tingkat atas dari aplikasi, dimana ListView sebagai widget utama yang dibangun dari kombinasi Image, ListTile, dan Card.
+
+```dart
+body: ListView(
+ children: [
+   Image.asset(
+     'images/gunungkelud.jpg',
+     width: 600,
+     height: 240,
+     fit: BoxFit.cover,
+   ),
+   titleSection,
+   Card(
+   ),
+ ],
+),
+```
+
+### Penggunaan Row dan Column
+
+Row dan Column merupakan dua widget dasar dalam Flutter yang berfungsi untuk mengatur tata letak. Row digunakan untuk menyusun widget secara horizontal (mendatar), sedangkan Column digunakan untuk menyusun widget secara vertikal (menurun).
+Berikut contoh kode penggunaan Row untuk menyejajarkan beberapa tombol:
+
+```dart
+Widget buttonSection = Row(
+ mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+ children: [
+   _buildButtonColumn(color, Icons.call, 'REVIEW'),
+   _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
+   _buildButtonColumn(color, Icons.share, 'SHARE'),
+ ],
+);
+```
+
+Berikut adalah contoh penggunaan Column untuk menyusun ikon dan teks pada sebuah tombol secara vertikal. Dengan Column, elemen-elemen dapat ditumpuk dari atas ke bawah sehingga membentuk tata letak yang rapi.
+
+```dart
+Column _buildButtonColumn(Color color, IconData icon, String label) {
+  return Column(
+    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Icon(icon, color: color),
+      Container(
+        // ...
+      ),
+    ],
+  );
+}
+```
+
+### Penggunaan ListView
+
+ListView merupakan widget yang serupa dengan Column, namun memiliki keunggulan tambahan berupa kemampuan untuk digulir (scroll) secara otomatis ketika konten melebihi ukuran layar. Fitur ini sangat penting untuk mencegah terjadinya error overflow serta memastikan aplikasi tetap berjalan optimal pada berbagai ukuran layar.
+
+Pada kode ini, seluruh komponen utama antarmuka pengguna—seperti Image, titleSection, dan Card—ditempatkan di dalam sebuah ListView yang berfungsi sebagai body dari Scaffold.
+
+```dart
+body: ListView(
+ children: [
+   Image.asset(
+     // ...
+   ),
+   titleSection,
+   Card(
+     // ...
+   ),
+ ],
+),
+```
+
+### Penggunaan Container
+
+Container merupakan widget serbaguna yang berfungsi sebagai wadah untuk membungkus widget lain. Melalui Container, kita dapat menambahkan margin atau padding, memberikan warna latar belakang, maupun menambahkan dekorasi seperti bingkai (border).
+
+Pada kode ini, Container digunakan secara khusus untuk memberikan margin (jarak atas dan bawah) pada teks di dalam setiap tombol.
+
+```dart
+Container(
+ margin: const EdgeInsets.only(top: 8, bottom: 8),
+ child: Text(
+   label,
+   // ...
+ ),
+),
+// ...
+```
+
+### Penggunaan Card
+
+Card merupakan widget bawaan Material Design yang berfungsi sebagai panel dengan sudut membulat serta efek bayangan (elevation). Widget ini digunakan untuk mengelompokkan informasi yang saling berkaitan sekaligus memberikan penekanan visual.
+
+Pada kode ini, Card dimanfaatkan untuk membungkus buttonSection dan textSection, sehingga keduanya tampil dalam satu panel yang terangkat secara visual.
+
+```dart
+Card(
+ margin: const EdgeInsets.all(16.0),
+ elevation: 4.0,
+ child: Column(
+   children: [
+     buttonSection,
+     textSection,
+   ],
+ ),
+),
+```
+
+### Penggunaan ListTile
+
+ListTile merupakan widget berbentuk baris yang telah distilisasi dan dioptimalkan untuk menampilkan item dalam sebuah daftar. Widget ini menyediakan slot khusus seperti title (judul), subtitle (subjudul), dan trailing (widget di sisi kanan), sehingga memudahkan pembuatan baris yang kompleks.
+
+Pada kode ini, ListTile digunakan untuk menggantikan struktur Row dan Column yang rumit pada bagian judul, sehingga tampil lebih ringkas dan mudah dipahami.
+
+```dart
+Widget titleSection = ListTile(
+ title: const Text(
+   'Oeschinen Lake Campground',
+   style: TextStyle(fontWeight: FontWeight.bold),
+ ),
+ subtitle: Text(
+   'Kandersteg, Switzerland',
+   style: TextStyle(color: Colors.grey[500]),
+ ),
+ trailing: Row(
+   mainAxisSize: MainAxisSize.min,
+   children: [
+     Icon(Icons.star, color: Colors.red[500]),
+     const Text('41'),
+   ],
+ ),
+ contentPadding: const EdgeInsets.all(32),
+);
+```
+
+### Penggunaan Stack
+
+Stack adalah widget yang berfungsi untuk menumpuk beberapa widget secara berlapis, mirip dengan menumpuk kartu atau foto. Widget pertama dalam daftar children akan menjadi lapisan dasar, sedangkan widget berikutnya akan ditampilkan di atasnya. Untuk mengatur posisi setiap lapisan secara presisi, biasanya digunakan widget Positioned.
+
+Pada kode ini, Stack digunakan untuk menempatkan sebuah Container berisi teks (dengan Positioned) di atas Image.asset.
+
+```dart
+Stack(
+  alignment: Alignment.bottomLeft,
+  children: [
+    Image.asset(
+      'images/gunungkelud.jpg',
+      width: 600,
+      height: 240,
+      fit: BoxFit.cover,
+    ),
+    Positioned(
+      bottom: 16,
+      left: 16,
+      child: Container(
+        padding:
+            const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        color: Colors.black54,
+        child: const Text(
+          'Gunung Kelud',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    ),
+  ],
+)
+```
+
+### Struktur Kode Lengkap
+
+```dart
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    Widget titleSection = ListTile(
+      title: const Text(
+        'Wisata Gunung Kelud',
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+      subtitle: Text(
+        'Kabupaten Kediri, Jawa Timur',
+        style: TextStyle(color: Colors.grey[500]),
+      ),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.star, color: Colors.red[500]),
+          const Text('5.0'),
+        ],
+      ),
+      contentPadding: const EdgeInsets.all(32),
+    );
+
+    Color color = Theme.of(context).primaryColor;
+
+    Widget buttonSection = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _buildButtonColumn(color, Icons.call, 'REVIEW'),
+        _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
+        _buildButtonColumn(color, Icons.share, 'SHARE'),
+      ],
+    );
+
+    Widget textSection = const Padding(
+      padding: EdgeInsets.all(32),
+      child: Text(
+          'Gunung Kelud berada di Jawa Timur dengan ketinggian sekitar 1.731 mdpl. '
+          'Dikenal sebagai gunung berapi aktif, Kelud menawarkan pemandangan kawah '
+          'menawan dan udara sejuk, menjadikannya tujuan populer untuk wisata alam.',
+        softWrap: true,
+      ),
+    );
+
+    return MaterialApp(
+      title: 'Flutter layout demo',
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Destinasi Wisata Jawa Timur')),
+        body: ListView(
+          children: [
+            Stack(
+              alignment: Alignment.bottomLeft,
+              children: [
+                Image.asset(
+                  'images/gunungkelud.jpg',
+                  width: 600,
+                  height: 240,
+                  fit: BoxFit.cover,
+                ),
+                Positioned(
+                  bottom: 16,
+                  left: 16,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8,
+                      horizontal: 12,
+                    ),
+                    color: Colors.black54,
+                    child: const Text(
+                      'Gunung Kelud',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            titleSection,
+            Card(
+              margin: const EdgeInsets.all(16.0),
+              elevation: 4.0,
+              child: Column(children: [buttonSection, textSection]),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Column _buildButtonColumn(Color color, IconData icon, String label) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon, color: color),
+        Container(
+          margin: const EdgeInsets.only(top: 8, bottom: 8),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: color,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+```
+
+### OUTPUT AKHIR UJI COBA
+
+![TUGAS PRAK 1](img/TugasPraktikum1.png)
+
 
 
 3. Kumpulkan link commit repository GitHub Anda kepada dosen yang telah disepakati!
