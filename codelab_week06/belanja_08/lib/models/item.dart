@@ -1,15 +1,15 @@
-// lib/models/item.dart
 class Item {
   final String name;
   final int price;
+  final String imageUrl;
+  final int stock;
+  final double rating;
 
-  const Item({required this.name, required this.price});
-
-  factory Item.fromJson(Map<String, dynamic> json) =>
-      Item(name: json['name'] as String, price: json['price'] as int);
-
-  Map<String, dynamic> toJson() => {'name': name, 'price': price};
-
-  @override
-  String toString() => 'Item(name: $name, price: $price)';
+  Item({
+    required this.name,
+    required this.price,
+    required this.imageUrl,
+    required this.stock,
+    required this.rating,
+  });
 }
