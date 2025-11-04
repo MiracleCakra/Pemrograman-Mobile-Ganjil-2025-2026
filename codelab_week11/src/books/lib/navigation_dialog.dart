@@ -4,8 +4,7 @@ class NavigationDialogScreen extends StatefulWidget {
   const NavigationDialogScreen({super.key});
 
   @override
-  State<NavigationDialogScreen> createState() =>
-      _NavigationDialogScreenState();
+  State<NavigationDialogScreen> createState() => _NavigationDialogScreenState();
 }
 
 class _NavigationDialogScreenState extends State<NavigationDialogScreen> {
