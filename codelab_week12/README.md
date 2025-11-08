@@ -130,7 +130,7 @@ Tambahkan variabel di dalam class ColorStream seperti berikut.
 ```
 
 ## Soal 2
-Tambahkan 5 warna lainnya sesuai keinginan Anda pada variabel colors tersebut.
+### Tambahkan 5 warna lainnya sesuai keinginan Anda pada variabel colors tersebut.
 
 ```dart
   final List<Color> colors = [
@@ -148,4 +148,35 @@ Tambahkan 5 warna lainnya sesuai keinginan Anda pada variabel colors tersebut.
   ];
 ```
 
-Lakukan commit hasil jawaban Soal 2 dengan pesan "W12: Jawaban Soal 2"
+### Lakukan commit hasil jawaban Soal 2 dengan pesan "W12: Jawaban Soal 2"
+
+
+# Langkah 5: Tambah method getColors()
+Di dalam class ColorStream ketik method seperti kode berikut. Perhatikan tanda bintang di akhir keyword async* (ini digunakan untuk melakukan Stream data)
+
+```dart
+Stream<Color> getColors() async* {
+}
+```
+
+# Langkah 6: Tambah perintah yield*
+Tambahkan kode berikut ini.
+
+```dart
+yield* Stream.periodic(
+  const Duration(seconds: 1), (int t) {
+    int index = t % colors.length;
+    return colors[index];
+});
+```
+
+## Soal 3
+### Jelaskan fungsi keyword yield* pada kode tersebut!
+
+Jawab: yield* digunakan untuk mengalirkan (delegate) seluruh nilai dari Stream lain ke dalam Stream yang sedang dibuat. Berbeda dengan yield yang mengirimkan satu nilai, yield* mengirimkan semua nilai dari Stream secara berurutan.
+
+### Apa maksud isi perintah kode tersebut?
+
+Jawab: konstruksi ini membentuk stream yang memancarkan data setiap satu detik. Parameter t berperan sebagai penghitung yang bertambah secara berurutan, lalu diproyeksikan ke dalam rentang indeks list colors melalui operasi modulo agar tetap valid. Dari hasil tersebut, warna dipilih sesuai indeks dan dikirimkan ke stream. Dengan mekanisme siklik ini, warna akan berganti tiap detik dan kembali ke awal setelah mencapai elemen terakhir, sehingga tercipta aliran data yang berulang tanpa henti.
+
+### Lakukan commit hasil jawaban Soal 3 dengan pesan "W12: Jawaban Soal 3"
