@@ -180,3 +180,69 @@ Jawab: yield* digunakan untuk mengalirkan (delegate) seluruh nilai dari Stream l
 Jawab: konstruksi ini membentuk stream yang memancarkan data setiap satu detik. Parameter t berperan sebagai penghitung yang bertambah secara berurutan, lalu diproyeksikan ke dalam rentang indeks list colors melalui operasi modulo agar tetap valid. Dari hasil tersebut, warna dipilih sesuai indeks dan dikirimkan ke stream. Dengan mekanisme siklik ini, warna akan berganti tiap detik dan kembali ke awal setelah mencapai elemen terakhir, sehingga tercipta aliran data yang berulang tanpa henti.
 
 ### Lakukan commit hasil jawaban Soal 3 dengan pesan "W12: Jawaban Soal 3"
+
+# Langkah 7: Buka main.dart
+Ketik kode impor file ini pada file main.dart
+
+```dart
+import 'stream.dart';
+```
+
+# Langkah 8: Tambah variabel
+Ketik dua properti ini di dalam class _StreamHomePageState
+
+```dart
+  Color bgColor = Colors.blueGrey;
+  late ColorStream colorStream;
+```
+
+# Langkah 9: Tambah method changeColor()
+Tetap di file main, Ketik kode seperti berikut
+
+```dart
+  void changeColor() async {
+    await for (var eventColor in colorStream.getColors()) {
+      setState(() {
+        bgColor = eventColor;
+      });
+    }
+  }
+```
+
+# Langkah 10: Lakukan override initState()
+Ketika kode seperti berikut:
+
+```dart
+  @override
+  void initState() {
+    super.initState();
+    colorStream = ColorStream();
+    changeColor();
+  }
+```
+
+# Langkah 11: Ubah isi Scaffold()
+Sesuaikan kode seperti berikut.
+
+```dart
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Stream CakraWangsa'),
+      ),
+      body: Container(
+        decoration: BoxDecoration(color: bgColor),
+      ),
+    );
+  }
+```
+
+# Langkah 12: Run
+Lakukan running pada aplikasi Flutter Anda, maka akan terlihat berubah warna background setiap detik.
+
+## Soal 4
+## Capture hasil praktikum Anda berupa GIF dan lampirkan di README.
+
+![doksli](img/Praktikum1_Dart%20Stream.gif)
+
+## Lakukan commit hasil jawaban Soal 4 dengan pesan "W12: Jawaban Soal 4"
+
