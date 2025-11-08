@@ -40,9 +40,11 @@ Jl. Soekarno Hatta No.9, Jatimulyo, Kec. Lowokwaru, Kota Malang, Jawa Timur 6514
 ---
 
 # Langkah 1: Buat Project Baru
+
 Buatlah sebuah project flutter baru dengan nama stream_nama (beri nama panggilan Anda) di folder week-12/src/ repository GitHub Anda.
 
 ## Langkah 2: Buka file main.dart
+
 Ketiklah kode seperti berikut ini.
 
 ```dart
@@ -85,6 +87,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
 ```
 
 ## Soal 1
+
 Tambahkan nama panggilan Anda pada title app sebagai identitas hasil pekerjaan Anda.
 
 ```dart
@@ -106,6 +109,7 @@ primarySwatch: Colors.blue,
 ```
 
 # Langkah 3: Buat file baru stream.dart
+
 Buat file baru di folder lib project Anda. Lalu isi dengan kode berikut.
 
 ```dart
@@ -117,6 +121,7 @@ class ColorStream {
 ```
 
 # Langkah 4: Tambah variabel colors
+
 Tambahkan variabel di dalam class ColorStream seperti berikut.
 
 ```dart
@@ -130,6 +135,7 @@ Tambahkan variabel di dalam class ColorStream seperti berikut.
 ```
 
 ## Soal 2
+
 ### Tambahkan 5 warna lainnya sesuai keinginan Anda pada variabel colors tersebut.
 
 ```dart
@@ -150,16 +156,17 @@ Tambahkan variabel di dalam class ColorStream seperti berikut.
 
 ### Lakukan commit hasil jawaban Soal 2 dengan pesan "W12: Jawaban Soal 2"
 
-
 # Langkah 5: Tambah method getColors()
-Di dalam class ColorStream ketik method seperti kode berikut. Perhatikan tanda bintang di akhir keyword async* (ini digunakan untuk melakukan Stream data)
+
+Di dalam class ColorStream ketik method seperti kode berikut. Perhatikan tanda bintang di akhir keyword async\* (ini digunakan untuk melakukan Stream data)
 
 ```dart
 Stream<Color> getColors() async* {
 }
 ```
 
-# Langkah 6: Tambah perintah yield*
+# Langkah 6: Tambah perintah yield\*
+
 Tambahkan kode berikut ini.
 
 ```dart
@@ -171,7 +178,8 @@ yield* Stream.periodic(
 ```
 
 ## Soal 3
-### Jelaskan fungsi keyword yield* pada kode tersebut!
+
+### Jelaskan fungsi keyword yield\* pada kode tersebut!
 
 Jawab: yield* digunakan untuk mengalirkan (delegate) seluruh nilai dari Stream lain ke dalam Stream yang sedang dibuat. Berbeda dengan yield yang mengirimkan satu nilai, yield* mengirimkan semua nilai dari Stream secara berurutan.
 
@@ -182,6 +190,7 @@ Jawab: konstruksi ini membentuk stream yang memancarkan data setiap satu detik. 
 ### Lakukan commit hasil jawaban Soal 3 dengan pesan "W12: Jawaban Soal 3"
 
 # Langkah 7: Buka main.dart
+
 Ketik kode impor file ini pada file main.dart
 
 ```dart
@@ -189,7 +198,8 @@ import 'stream.dart';
 ```
 
 # Langkah 8: Tambah variabel
-Ketik dua properti ini di dalam class _StreamHomePageState
+
+Ketik dua properti ini di dalam class \_StreamHomePageState
 
 ```dart
   Color bgColor = Colors.blueGrey;
@@ -197,6 +207,7 @@ Ketik dua properti ini di dalam class _StreamHomePageState
 ```
 
 # Langkah 9: Tambah method changeColor()
+
 Tetap di file main, Ketik kode seperti berikut
 
 ```dart
@@ -210,6 +221,7 @@ Tetap di file main, Ketik kode seperti berikut
 ```
 
 # Langkah 10: Lakukan override initState()
+
 Ketika kode seperti berikut:
 
 ```dart
@@ -222,6 +234,7 @@ Ketika kode seperti berikut:
 ```
 
 # Langkah 11: Ubah isi Scaffold()
+
 Sesuaikan kode seperti berikut.
 
 ```dart
@@ -237,12 +250,25 @@ Sesuaikan kode seperti berikut.
 ```
 
 # Langkah 12: Run
+
 Lakukan running pada aplikasi Flutter Anda, maka akan terlihat berubah warna background setiap detik.
 
 ## Soal 4
+
 ## Capture hasil praktikum Anda berupa GIF dan lampirkan di README.
 
 ![doksli](img/Praktikum1_Dart%20Stream.gif)
 
 ## Lakukan commit hasil jawaban Soal 4 dengan pesan "W12: Jawaban Soal 4"
 
+# Langkah 13: Ganti isi method changeColor()
+
+Anda boleh comment atau hapus kode sebelumnya, lalu ketika kode seperti berikut.
+
+## Soal 5
+
+### Jelaskan perbedaan menggunakan listen dan await for (langkah 9) !
+
+Perbedaan antara `await for` dan `listen()` terletak pada mekanisme eksekusi dan pengelolaan aliran data stream. Konstruksi `await for` menerapkan pendekatan sinkron-blocking yang mengiterasi setiap event secara berurutan dan menghentikan eksekusi kode selanjutnya hingga stream berakhir atau dibatalkan, sehingga cocok untuk pemrosesan data yang memerlukan urutan ketat. Sebaliknya, metode `listen()` mengimplementasikan pola asinkron-non-blocking dengan melakukan subscription terhadap stream dan langsung melanjutkan eksekusi kode berikutnya tanpa menunggu, memberikan fleksibilitas lebih tinggi melalui kemampuan penanganan error, callback completion, serta kontrol subscription yang dapat dibatalkan kapan saja, menjadikannya lebih optimal untuk aplikasi Flutter yang memerlukan responsivitas antarmuka pengguna.
+
+### Lakukan commit hasil jawaban Soal 5 dengan pesan "W12: Jawaban Soal 5"
