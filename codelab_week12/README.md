@@ -39,11 +39,15 @@ Jl. Soekarno Hatta No.9, Jatimulyo, Kec. Lowokwaru, Kota Malang, Jawa Timur 6514
 
 ---
 
+# Praktikum 1: Dart Streams
+
+Selesaikan langkah-langkah praktikum berikut ini menggunakan editor Visual Studio Code (VS Code) atau Android Studio atau code editor lain kesukaan Anda. Jawablah di laporan praktikum Anda (ketik di README.md) pada setiap soal yang ada di beberapa langkah praktikum ini.
+
 # Langkah 1: Buat Project Baru
 
 Buatlah sebuah project flutter baru dengan nama stream_nama (beri nama panggilan Anda) di folder week-12/src/ repository GitHub Anda.
 
-## Langkah 2: Buka file main.dart
+# Langkah 2: Buka file main.dart
 
 Ketiklah kode seperti berikut ini.
 
@@ -272,3 +276,151 @@ Anda boleh comment atau hapus kode sebelumnya, lalu ketika kode seperti berikut.
 Perbedaan antara `await for` dan `listen()` terletak pada mekanisme eksekusi dan pengelolaan aliran data stream. Konstruksi `await for` menerapkan pendekatan sinkron-blocking yang mengiterasi setiap event secara berurutan dan menghentikan eksekusi kode selanjutnya hingga stream berakhir atau dibatalkan, sehingga cocok untuk pemrosesan data yang memerlukan urutan ketat. Sebaliknya, metode `listen()` mengimplementasikan pola asinkron-non-blocking dengan melakukan subscription terhadap stream dan langsung melanjutkan eksekusi kode berikutnya tanpa menunggu, memberikan fleksibilitas lebih tinggi melalui kemampuan penanganan error, callback completion, serta kontrol subscription yang dapat dibatalkan kapan saja, menjadikannya lebih optimal untuk aplikasi Flutter yang memerlukan responsivitas antarmuka pengguna.
 
 ### Lakukan commit hasil jawaban Soal 5 dengan pesan "W12: Jawaban Soal 5"
+
+# Praktikum 2: Stream controllers dan sinks
+
+StreamControllers akan membuat jembatan antara Stream dan Sink. Stream berisi data secara sekuensial yang dapat diterima oleh subscriber manapun, sedangkan Sink digunakan untuk mengisi (injeksi) data.
+
+Secara sederhana, StreamControllers merupakan stream management. Ia akan otomatis membuat stream dan sink serta beberapa method untuk melakukan kontrol terhadap event dan fitur-fitur yang ada di dalamnya.
+
+Anda dapat membayangkan stream sebagai pipa air yang mengalir searah, dari salah satu ujung Anda dapat mengisi data dan dari ujung lain data itu keluar. Anda dapat melihat konsep stream pada gambar diagram berikut ini.
+
+## Langkah 1: Buka file stream.dart
+
+Lakukan impor dengan mengetik kode ini.
+
+```dart
+import 'dart:async';
+```
+
+## Langkah 2: Tambah class NumberStream
+
+Tetap di file stream.dart tambah class baru seperti berikut.
+
+```dart
+class NumberStream {
+}
+```
+
+## Langkah 3: Tambah StreamController
+
+Di dalam class NumberStream buatlah variabel seperti berikut.
+
+```dart
+final StreamController<int> controller = StreamController<int>();
+```
+
+## Langkah 4: Tambah method addNumberToSink
+
+Tetap di class NumberStream buatlah method ini
+
+```dart
+  void addNumberToSink(int newNumber) {
+    controller.sink.add(newNumber);
+  }
+```
+
+## Langkah 5: Tambah method close()
+
+```dart
+  close() {
+    controller.close();
+  }
+```
+
+## Langkah 6: Buka main.dart
+
+Ketik kode import seperti berikut
+
+```dart
+import 'dart:async';
+import 'dart:math';
+```
+
+## Langkah 7: Tambah variabel
+
+Di dalam class \_StreamHomePageState ketik variabel berikut
+
+```dart
+  int lastNumber = 0;
+  late StreamController numberStreamController;
+  late NumberStream numberStream;
+```
+
+## Langkah 8: Edit initState()
+
+```dart
+  @override
+  void initState() {
+    numberStream = NumberStream();
+    numberStreamController = numberStream.controller;
+    Stream stream = numberStreamController.stream;
+    stream.listen((event) {
+      setState(() {
+        lastNumber = event;
+      });
+    });
+    super.initState();
+  }
+```
+
+## Langkah 9: Edit dispose()
+
+```dart
+  @override
+  void dispose() {
+    numberStreamController.close();
+    super.dispose();
+  }
+```
+
+## Langkah 10: Tambah method addRandomNumber()
+
+```dart
+void addRandomNumber() {
+  Random random = Random();
+  int myNum = random.nextInt(10);
+  numberStream.addNumberToSink(myNum);
+}
+```
+
+## Langkah 11: Edit method build()
+
+```dart
+      body: SizedBox(
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(lastNumber.toString()),
+            ElevatedButton(
+              onPressed: () => addRandomNumber(),
+              child: const Text('New Random Number'),
+            )
+          ],
+        ),
+      ),
+```
+
+## Langkah 12: Run
+
+Lakukan running pada aplikasi Flutter Anda, maka akan terlihat seperti gambar berikut.
+
+## Soal 6
+
+#### Jelaskan maksud kode langkah 8 dan 10 tersebut!
+
+**Langkah 8 (initState):**
+
+Kode pada `initState()` berfungsi untuk melakukan inisialisasi dan konfigurasi stream saat widget pertama kali dibuat. Tahapan yang dilakukan meliputi pembuatan instance `NumberStream` sebagai sumber data, pengambilan referensi `StreamController` untuk mengakses stream-nya, kemudian melakukan subscription terhadap stream tersebut menggunakan method `listen()`. Setiap kali ada event (data baru) yang dipancarkan melalui stream, listener akan menangkapnya dan memanggil `setState()` untuk memperbarui nilai variabel `lastNumber`, yang kemudian memicu rebuild widget untuk menampilkan nilai terbaru di UI. Mekanisme ini menciptakan reaktivitas data dimana perubahan pada stream secara otomatis tercermin pada tampilan aplikasi.
+
+**Langkah 10 (addRandomNumber):**
+
+Method `addRandomNumber()` berperan sebagai trigger untuk menginjeksikan data ke dalam stream. Prosesnya dimulai dengan membuat instance `Random` untuk menghasilkan angka acak, kemudian menggunakan `nextInt(10)` untuk mendapatkan bilangan bulat acak dalam rentang 0 hingga 9. Angka yang dihasilkan tersebut kemudian dikirimkan ke stream melalui method `addNumberToSink()` dari `NumberStream`, yang secara internal memanfaatkan `controller.sink.add()` untuk memasukkan data ke dalam stream. Data ini selanjutnya akan ditangkap oleh listener yang telah didefinisikan pada `initState()`, menciptakan alur data searah dari source (sink) menuju subscriber (listener) yang merupakan konsep fundamental dari arsitektur stream.
+
+#### Capture hasil praktikum Anda berupa GIF dan lampirkan di README.
+
+![doksli](img/Praktikum2_Stream%20controllers%20dan%20sinks.gif)
+
+#### Lalu lakukan commit dengan pesan "W12: Jawaban Soal 6".
