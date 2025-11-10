@@ -497,3 +497,67 @@ Ketiga langkah tersebut mengimplementasikan mekanisme error handling dalam strea
 ```
 
 #### Lakukan commit dengan pesan "W12: Jawaban Soal 7".
+
+---
+
+# Praktikum 3: Injeksi data ke streams
+
+Skenario yang umum dilakukan adalah melakukan manipulasi atau transformasi data stream sebelum sampai pada UI end user. Hal ini sangatlah berguna ketika Anda membutuhkan untuk filter data berdasarkan kondisi tertentu, melakukan validasi data, memodifikasinya, atau melakukan proses lain yang memicu beberapa output baru. Contohnya melakukan konversi angka ke string, membuat sebuah perhitungan, atau menghilangkan data yang berulang terus tampil.
+
+Pada praktikum 3 ini, Anda akan menggunakan StreamTransformers ke dalam stream untuk melakukan map dan filter data.
+
+Setelah Anda menyelesaikan praktikum 2, Anda dapat melanjutkan praktikum 3 ini. Selesaikan langkah-langkah praktikum berikut ini menggunakan editor Visual Studio Code (VS Code) atau Android Studio atau code editor lain kesukaan Anda. Jawablah di laporan praktikum Anda pada setiap soal yang ada di beberapa langkah praktikum ini.
+
+## Langkah 1: Buka main.dart
+
+Tambahkan variabel baru di dalam class \_StreamHomePageState
+
+```dart
+  late StreamTransformer transformer;
+```
+
+## Langkah 2: Tambahkan kode ini di initState
+
+```dart
+    transformer = StreamTransformer<int, int>.fromHandlers(
+      handleData: (value, sink) {
+        sink.add(value * 10);
+      },
+      handleError: (error, trace, sink) {
+        sink.add(-1);
+      },
+      handleDone: (sink) => sink.close(),
+    );
+```
+
+## Langkah 3: Tetap di initState
+
+Lakukan edit seperti kode berikut.
+
+```dart
+    stream.transform(transformer).listen((event) {
+      setState(() {
+        lastNumber = event;
+      });
+    }).onError((error) {
+      setState(() {
+        lastNumber = -1;
+      });
+    });
+```
+
+## Langkah 4: Run
+
+Terakhir, run atau tekan F5 untuk melihat hasilnya jika memang belum running. Bisa juga lakukan hot restart jika aplikasi sudah running. Maka hasilnya akan seperti gambar berikut ini. Anda akan melihat tampilan angka dari 0 hingga 90.
+
+## Soal 8
+
+### Jelaskan maksud kode langkah 1-3 tersebut!
+
+Ketiga langkah tersebut mengimplementasikan transformasi data stream menggunakan `StreamTransformer` untuk memodifikasi nilai sebelum sampai ke listener. **Langkah 1** mendeklarasikan variabel `transformer` bertipe `StreamTransformer` yang akan berfungsi sebagai middleware untuk memproses data stream. **Langkah 2** melakukan inisialisasi transformer dengan `StreamTransformer<int, int>.fromHandlers()` yang mendefinisikan tiga handler: `handleData` untuk mentransformasi setiap nilai input dengan mengalikannya 10 (misalnya angka 5 menjadi 50), `handleError` untuk menangani error dengan mengubahnya menjadi nilai -1, dan `handleDone` untuk menutup sink ketika stream selesai. **Langkah 3** mengaplikasikan transformer ke stream menggunakan method `transform()` sebelum melakukan subscription dengan `listen()`, sehingga setiap data yang melewati stream akan terlebih dahulu ditransformasi (dikali 10) sebelum diterima oleh listener dan di-update ke UI melalui `setState()`. Mekanisme ini mendemonstrasikan konsep data pipeline dalam reactive programming, dimana data dapat diproses dan dimodifikasi secara deklaratif sebelum mencapai destination akhir, memungkinkan pemisahan logic transformasi dari logic presentasi untuk arsitektur yang lebih maintainable.
+
+#### Capture hasil praktikum Anda berupa GIF dan lampirkan di README.
+
+![Stream Transformer](img/Praktikum3_Lanjutan%20State%20Management%20dengan%20Streams.gif)
+
+#### Lakukan commit dengan pesan "W12: Jawaban Soal 8".
