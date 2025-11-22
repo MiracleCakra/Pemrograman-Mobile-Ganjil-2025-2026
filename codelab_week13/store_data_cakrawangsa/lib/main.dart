@@ -4,6 +4,7 @@ import './model/pizza.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Path Provider - cakrawangsa',
+      title: 'Secure Storage - cakrawangsa',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.blue.shade50,
@@ -43,102 +44,73 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String documentPath = '';
-  String tempPath = '';
-  late File myFile;
-  String fileText = '';
-  int appCounter = 0;
+  final pwdController = TextEditingController();
+  final storage = const FlutterSecureStorage();
+  final String myKey = "myPass";
+  String myPass = '';
 
   @override
-  void initState() {
-    super.initState();
-    readAndWritePreference();
-    getPaths().then((_) {
-      myFile = File('$documentPath/pizzas.txt');
-      writeFile();
-    });
+  void dispose() {
+    pwdController.dispose();
+    super.dispose();
+  }
+
+  Future<void> writeToSecureStorage() async {
+    await storage.write(key: myKey, value: pwdController.text);
+  }
+
+  Future<String> readFromSecureStorage() async {
+    return await storage.read(key: myKey) ?? "";
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Path Provider - cakrawangsa')),
+      appBar: AppBar(title: const Text('Secure Storage - cakrawangsa')),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Document Path:\n$documentPath',
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 14),
+            TextField(
+              controller: pwdController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                fillColor: Colors.white,
+                filled: true,
+              ),
             ),
-            const Divider(),
-            Text(
-              'Temporary Path:\n$tempPath',
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 14),
-            ),
-            const Divider(),
+            const SizedBox(height: 20),
+
             ElevatedButton(
-              onPressed: () => readFile(),
-              child: const Text('Read File'),
+              onPressed: () {
+                writeToSecureStorage();
+                pwdController.clear();
+              },
+              child: const Text('Save Value'),
             ),
+            
+            const SizedBox(height: 10),
+
+            ElevatedButton(
+              onPressed: () async {
+                String value = await readFromSecureStorage();
+                setState(() {
+                  myPass = value;
+                });
+              },
+              child: const Text('Read Value'),
+            ),
+
+            const SizedBox(height: 20),
+
             Text(
-              fileText,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
+              "Stored Value: $myPass",
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],
         ),
       ),
     );
-  }
-
-  Future readAndWritePreference() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    appCounter = (prefs.getInt('appCounter') ?? 0);
-    appCounter++;
-    await prefs.setInt('appCounter', appCounter);
-    setState(() {
-      appCounter = appCounter;
-    });
-  }
-
-  Future deletePreference() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
-    setState(() {
-      appCounter = 0;
-    });
-  }
-
-  Future getPaths() async {
-    final docDir = await getApplicationDocumentsDirectory();
-    final tempDir = await getTemporaryDirectory();
-    setState(() {
-      documentPath = docDir.path;
-      tempPath = tempDir.path;
-    });
-  }
-
-  Future<bool> writeFile() async {
-    try {
-      await myFile.writeAsString('Margherita, Capricciosa, Napoli');
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  Future<bool> readFile() async {
-    try {
-      String fileContent = await myFile.readAsString();
-      setState(() {
-        fileText = fileContent;
-      });
-      return true;
-    } catch (e) {
-      return false;
-    }
   }
 }
