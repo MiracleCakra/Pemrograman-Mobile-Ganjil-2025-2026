@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import './model/pizza.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 void main() {
   runApp(const MyApp());
@@ -44,13 +45,18 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String documentPath = '';
   String tempPath = '';
+  late File myFile;
+  String fileText = '';
   int appCounter = 0;
 
   @override
   void initState() {
     super.initState();
-    getPaths();
     readAndWritePreference();
+    getPaths().then((_) {
+      myFile = File('$documentPath/pizzas.txt');
+      writeFile();
+    });
   }
 
   @override
@@ -63,29 +69,29 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              'Document Path:\n$documentPath', 
+              'Document Path:\n$documentPath',
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 14),
             ),
             const Divider(),
             Text(
-              'Temporary Path:\n$tempPath', 
+              'Temporary Path:\n$tempPath',
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 14),
+            ),
+            const Divider(),
+            ElevatedButton(
+              onPressed: () => readFile(),
+              child: const Text('Read File'),
+            ),
+            Text(
+              fileText,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
             ),
           ],
         ),
       ),
     );
-  }
-
-  Future getPaths() async {
-    final docDir = await getApplicationDocumentsDirectory();
-    final tempDir = await getTemporaryDirectory();
-    setState(() {
-      documentPath = docDir.path;
-      tempPath = tempDir.path;
-    });
   }
 
   Future readAndWritePreference() async {
@@ -104,5 +110,35 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       appCounter = 0;
     });
+  }
+
+  Future getPaths() async {
+    final docDir = await getApplicationDocumentsDirectory();
+    final tempDir = await getTemporaryDirectory();
+    setState(() {
+      documentPath = docDir.path;
+      tempPath = tempDir.path;
+    });
+  }
+
+  Future<bool> writeFile() async {
+    try {
+      await myFile.writeAsString('Margherita, Capricciosa, Napoli');
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> readFile() async {
+    try {
+      String fileContent = await myFile.readAsString();
+      setState(() {
+        fileText = fileContent;
+      });
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }
