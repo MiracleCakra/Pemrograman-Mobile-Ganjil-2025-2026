@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
+import 'dart:convert'; 
 import 'package:store_data_cakrawangsa/model/pizza.dart';
 
 void main() {
@@ -41,21 +41,41 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Pizza> myPizzas = [];
+  bool isLoading = true; // Penanda status loading
+  String errorMsg = '';  // Penanda jika ada error
 
   @override
   void initState() {
     super.initState();
-    readJsonFile().then((value) {
+    // Kita panggil fungsi wrapper agar bisa pakai try-catch
+    loadData();
+  }
+
+  void loadData() async {
+    try {
+      List<Pizza> data = await readJsonFile();
       setState(() {
-        myPizzas = value;
+        myPizzas = data;
+        isLoading = false; // Matikan loading jika sukses
       });
-    });
+    } catch (e) {
+      setState(() {
+        errorMsg = e.toString(); // Simpan pesan error
+        isLoading = false;       // Matikan loading biar error terlihat
+      });
+      print("Error Terdeteksi: $e");
+    }
+  }
+
+  String convertToJSON(List<Pizza> pizzas) {
+    return jsonEncode(pizzas.map((pizza) => pizza.toJson()).toList());
   }
 
   Future<List<Pizza>> readJsonFile() async {
+    // Pastikan nama file ini benar dan ada di assets
     String myString = await DefaultAssetBundle.of(context)
-        .loadString('assets/pizzalist.json');
-
+        .loadString('assets/pizzalist_broken.json');
+    
     List pizzaMapList = jsonDecode(myString);
 
     List<Pizza> myPizzas = [];
@@ -64,6 +84,10 @@ class _MyHomePageState extends State<MyHomePage> {
       myPizzas.add(myPizza);
     }
 
+    String json = convertToJSON(myPizzas);
+    print("=== HASIL SERIALISASI JSON ===");
+    print(json);
+    
     return myPizzas;
   }
 
@@ -73,24 +97,27 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('Flutter JSON Demo - cakrawangsa'),
       ),
-      body: myPizzas.isEmpty
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: myPizzas.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child: ListTile(
-                    title: Text(
-                      myPizzas[index].pizzaName,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(myPizzas[index].description),
-                    leading: const Icon(Icons.local_pizza, color: Colors.orange),
-                  ),
-                );
-              },
-            ),
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator()) // Tampilkan spinner jika loading
+          : errorMsg.isNotEmpty
+              ? Center(child: Text("Error: $errorMsg", textAlign: TextAlign.center, style: const TextStyle(color: Colors.red))) // Tampilkan Error jika gagal
+              : ListView.builder(
+                  itemCount: myPizzas.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      child: ListTile(
+                        title: Text(
+                          myPizzas[index].pizzaName,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        // PERBAIKAN SUBTITLE SESUAI REQUEST:
+                        subtitle: Text("${myPizzas[index].description} - € ${myPizzas[index].price}"),
+                        leading: const Icon(Icons.local_pizza, color: Colors.orange),
+                      ),
+                    );
+                  },
+                ),
     );
   }
 }
