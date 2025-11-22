@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:store_data_cakrawangsa/model/pizza.dart';
 
 void main() {
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter JSON Demo - cakrawangsa',
+      title: 'Shared Preferences Demo - cakrawangsa',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.blue.shade50,
@@ -40,82 +41,62 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Pizza> myPizzas = [];
-  bool isLoading = true;
-  String errorMsg = '';
+  int appCounter = 0;
 
   @override
   void initState() {
     super.initState();
-    loadData();
+    readAndWritePreference();
   }
 
-  void loadData() async {
-    try {
-      List<Pizza> data = await readJsonFile();
-      setState(() {
-        myPizzas = data;
-        isLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        errorMsg = e.toString();
-        isLoading = false;
-      });
-      print("Error Terdeteksi: $e");
-    }
+  Future<void> readAndWritePreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    appCounter = prefs.getInt('appCounter') ?? 0;
+    appCounter++;
+
+    await prefs.setInt('appCounter', appCounter);
+    
+    setState(() {
+      appCounter = appCounter;
+    });
+  }
+
+  Future<void> deletePreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    setState(() {
+      appCounter = 0;
+    });
   }
 
   String convertToJSON(List<Pizza> pizzas) {
     return jsonEncode(pizzas.map((pizza) => pizza.toJson()).toList());
   }
 
-  Future<List<Pizza>> readJsonFile() async {
-    String myString = await DefaultAssetBundle.of(context)
-        .loadString('assets/pizzalist.json');
-    
-    List pizzaMapList = jsonDecode(myString);
-
-    List<Pizza> myPizzas = [];
-    for (var pizza in pizzaMapList) {
-      Pizza myPizza = Pizza.fromJson(pizza);
-      myPizzas.add(myPizza);
-    }
-
-    String json = convertToJSON(myPizzas);
-    print("=== HASIL SERIALISASI JSON ===");
-    print(json);
-    
-    return myPizzas;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter JSON Demo - cakrawangsa'),
+        title: const Text('Shared Preferences Demo - cakrawangsa'),
       ),
-      body: isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : errorMsg.isNotEmpty
-              ? Center(child: Text("Error: $errorMsg", textAlign: TextAlign.center, style: const TextStyle(color: Colors.red)))
-              : ListView.builder(
-                  itemCount: myPizzas.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      child: ListTile(
-                        title: Text(
-                          myPizzas[index].pizzaName,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-
-                        subtitle: Text("${myPizzas[index].description} - € ${myPizzas[index].price}"),
-                        leading: const Icon(Icons.local_pizza, color: Colors.orange),
-                      ),
-                    );
-                  },
-                ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              'You have opened the app $appCounter times.',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                deletePreference();
+              },
+              child: const Text('Reset Counter'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
