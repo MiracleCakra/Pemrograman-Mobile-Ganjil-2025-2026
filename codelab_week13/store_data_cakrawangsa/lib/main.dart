@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:convert'; 
+import 'dart:convert';
 import 'package:store_data_cakrawangsa/model/pizza.dart';
 
 void main() {
@@ -41,13 +41,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Pizza> myPizzas = [];
-  bool isLoading = true; // Penanda status loading
-  String errorMsg = '';  // Penanda jika ada error
+  bool isLoading = true;
+  String errorMsg = '';
 
   @override
   void initState() {
     super.initState();
-    // Kita panggil fungsi wrapper agar bisa pakai try-catch
     loadData();
   }
 
@@ -56,12 +55,12 @@ class _MyHomePageState extends State<MyHomePage> {
       List<Pizza> data = await readJsonFile();
       setState(() {
         myPizzas = data;
-        isLoading = false; // Matikan loading jika sukses
+        isLoading = false;
       });
     } catch (e) {
       setState(() {
-        errorMsg = e.toString(); // Simpan pesan error
-        isLoading = false;       // Matikan loading biar error terlihat
+        errorMsg = e.toString();
+        isLoading = false;
       });
       print("Error Terdeteksi: $e");
     }
@@ -72,9 +71,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<List<Pizza>> readJsonFile() async {
-    // Pastikan nama file ini benar dan ada di assets
     String myString = await DefaultAssetBundle.of(context)
-        .loadString('assets/pizzalist_broken.json');
+        .loadString('assets/pizzalist.json');
     
     List pizzaMapList = jsonDecode(myString);
 
@@ -98,9 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('Flutter JSON Demo - cakrawangsa'),
       ),
       body: isLoading
-          ? const Center(child: CircularProgressIndicator()) // Tampilkan spinner jika loading
+          ? const Center(child: CircularProgressIndicator())
           : errorMsg.isNotEmpty
-              ? Center(child: Text("Error: $errorMsg", textAlign: TextAlign.center, style: const TextStyle(color: Colors.red))) // Tampilkan Error jika gagal
+              ? Center(child: Text("Error: $errorMsg", textAlign: TextAlign.center, style: const TextStyle(color: Colors.red)))
               : ListView.builder(
                   itemCount: myPizzas.length,
                   itemBuilder: (context, index) {
@@ -111,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           myPizzas[index].pizzaName,
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        // PERBAIKAN SUBTITLE SESUAI REQUEST:
+
                         subtitle: Text("${myPizzas[index].description} - € ${myPizzas[index].price}"),
                         leading: const Icon(Icons.local_pizza, color: Colors.orange),
                       ),

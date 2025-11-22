@@ -550,3 +550,67 @@ Capture hasil running aplikasi Anda, kemudian impor ke laporan praktikum Anda!
 Lalu lakukan commit dengan pesan "W13: Jawaban Soal 4".
 
 ![tidak menampilkan null](img/Praktikum%202_Handle%20Kompabilitas%20JSON.2.jpg)
+
+# PRAKTIKUM 3
+
+### Langkah 1: Buka pizza.dart dan Buat Konstanta
+Di bagian atas file pizza.dart, di luar class Pizza, deklarasikan konstanta untuk setiap kunci JSON.
+
+
+
+### Langkah 2: Perbarui fromJson() menggunakan Konstanta
+Di constructor Pizza.fromJson, ganti semua string literal kunci JSON (misalnya 'id') dengan konstanta yang sesuai (keyId).
+
+
+
+Catatan: Konstruktor ini menggunakan sintaks inisialisasi, tetapi untuk kesederhanaan, kita menggunakan sintaks body.
+
+### Langkah 3: Perbarui toJson() menggunakan Konstanta
+Perbarui juga method toJson() agar menggunakan konstanta yang sama.
+
+
+
+### Langkah 4: Run
+Jalankan aplikasi. Tidak akan ada perubahan visual, tetapi kode Anda kini lebih safe dan maintainable.
+
+### Soal 5
+Jelaskan maksud kode lebih safe dan maintainable!
+
+jawab:
+
+
+### 1. Lebih aman jika terjadi Bug
+
+- **Mencegah Typo (Salah Ketik)**
+  - String manual: jika kita menulis `'pizaName'` (typo kurang `z`), kode tetap bisa dicompile, tetapi akan menyebabkan error saat runtime (data tidak muncul atau aplikasi crash). Kesalahan ini sulit dilacak.  
+  - Konstanta: jika kita menulis `keyNam` (typo kurang `e`), editor (misalnya VS Code) langsung menandai error (compile-time error). Kesalahan bisa diketahui sebelum aplikasi dijalankan.
+
+- **Konsistensi**  
+  Menjamin bahwa kunci yang dipakai di `fromJson` dan `toJson` selalu sama persis.
+
+### 2. Lebih Mudah untuk maintenance
+
+- **Perubahan Terpusat (Single Source of Truth)**  
+  - Cara lama: jika API server berubah, misalnya kunci `'pizzaName'` diganti menjadi `'name'`, kita harus mencari dan mengganti semua `'pizzaName'` di seluruh file proyek. Jika ada yang terlewat, aplikasi akan error.  
+  - Dengan konstanta: cukup ubah satu baris di deklarasi konstanta:  
+    ```dart
+    const String keyName = 'name';
+    ```  
+    Semua bagian kode lain yang menggunakan `keyName` otomatis mengikuti perubahan tersebut.
+
+---
+
+2. Lebih mudah untuk Dikelola
+
+    Perubahan Terpusat (Single Source of Truth):
+
+    Bayangkan jika API dari server berubah, misalnya kunci 'pizzaName' diganti menjadi 'name'.
+
+    Cara Lama: Kita harus mencari tulisan 'pizzaName' di seluruh file proyek (bisa puluhan file) dan menggantinya satu per satu. Jika terlewat satu saja, aplikasi error.
+
+    Cara Konstanta: Kita cukup mengubah satu baris kode saja di bagian deklarasi konstanta (const String keyName = 'name';). Seluruh bagian kode lain yang menggunakan keyName akan otomatis mengikuti perubahan tersebut.
+
+#### Capture hasil praktikum Anda dan lampirkan di README.
+
+![penanganan error](img/Praktikum%203_penanganan%20error%20json.jpg)
+Lalu lakukan commit dengan pesan "W13: Jawaban Soal 5".
