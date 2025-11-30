@@ -3,7 +3,14 @@ import 'model/pizza.dart';
 import 'httphelper.dart';
 
 class PizzaDetailScreen extends StatefulWidget {
-  const PizzaDetailScreen({super.key});
+  final Pizza pizza;
+  final bool isNew;
+
+  const PizzaDetailScreen({
+    super.key,
+    required this.pizza,
+    required this.isNew,
+  });
 
   @override
   State<PizzaDetailScreen> createState() => _PizzaDetailScreenState();
@@ -16,8 +23,21 @@ class _PizzaDetailScreenState extends State<PizzaDetailScreen> {
   final TextEditingController txtPrice = TextEditingController();
   final TextEditingController txtImageUrl = TextEditingController();
   final TextEditingController txtCategory = TextEditingController();
-  
+
   String operationResult = '';
+
+  @override
+  void initState() {
+    super.initState();
+    if (!widget.isNew) {
+      txtId.text = widget.pizza.id.toString();
+      txtName.text = widget.pizza.pizzaName;
+      txtDescription.text = widget.pizza.description;
+      txtPrice.text = widget.pizza.price.toString();
+      txtImageUrl.text = widget.pizza.imageUrl;
+      txtCategory.text = widget.pizza.category;
+    }
+  }
 
   @override
   void dispose() {
@@ -30,7 +50,7 @@ class _PizzaDetailScreenState extends State<PizzaDetailScreen> {
     super.dispose();
   }
 
-  Future postPizza() async {
+  Future savePizza() async {
     HttpHelper helper = HttpHelper();
     Pizza pizza = Pizza(
       id: int.tryParse(txtId.text) ?? 0,
@@ -40,8 +60,11 @@ class _PizzaDetailScreenState extends State<PizzaDetailScreen> {
       imageUrl: txtImageUrl.text,
       category: txtCategory.text,
     );
-    
-    String result = await helper.postPizza(pizza);
+
+    final result = await (widget.isNew
+        ? helper.postPizza(pizza)
+        : helper.putPizza(pizza));
+
     setState(() {
       operationResult = result;
     });
@@ -51,7 +74,7 @@ class _PizzaDetailScreenState extends State<PizzaDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pizza Detail'),
+        title: Text(widget.isNew ? 'Add New Pizza' : 'Edit Pizza'),
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       ),
       body: Padding(
@@ -96,13 +119,14 @@ class _PizzaDetailScreenState extends State<PizzaDetailScreen> {
               const SizedBox(height: 24),
               TextField(
                 controller: txtCategory,
-                decoration: const InputDecoration(hintText: 'Insert Category (e.g. Spicy, Veggie)'),
+                decoration: const InputDecoration(
+                    hintText: 'Insert Category (e.g. Spicy, Veggie)'),
               ),
               const SizedBox(height: 48),
               ElevatedButton(
-                child: const Text('Send Post'),
+                child: const Text('Save Pizza'),
                 onPressed: () {
-                  postPizza();
+                  savePizza();
                 },
               ),
             ],
