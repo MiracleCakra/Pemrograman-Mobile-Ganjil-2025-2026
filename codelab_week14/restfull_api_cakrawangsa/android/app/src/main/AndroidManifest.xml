@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="restfull_api_08"
+        android:label="restfull_api_cakrawangsa"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

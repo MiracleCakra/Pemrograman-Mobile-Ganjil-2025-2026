@@ -3,6 +3,7 @@ const String keyName = 'pizzaName';
 const String keyDescription = 'description';
 const String keyPrice = 'price';
 const String keyImage = 'imageUrl';
+const String keyCategory = 'category'; // 1. Key Baru untuk Kategori
 
 class Pizza {
   final int id;
@@ -10,6 +11,7 @@ class Pizza {
   final String description;
   final double price;
   final String imageUrl;
+  final String category; // 2. Field Baru untuk Kategori
 
   Pizza({
     required this.id,
@@ -17,6 +19,7 @@ class Pizza {
     required this.description,
     required this.price,
     required this.imageUrl,
+    required this.category, // 3. Wajib diisi
   });
 
   factory Pizza.fromJson(Map<String, dynamic> json) {
@@ -26,6 +29,8 @@ class Pizza {
       description: json[keyDescription] != null ? json[keyDescription].toString() : '',
       price: double.tryParse(json[keyPrice].toString()) ?? 0.0,
       imageUrl: json[keyImage] != null ? json[keyImage].toString() : '',
+      // 4. Ambil kategori dari JSON, default 'Main Course' kalau kosong
+      category: json[keyCategory] != null ? json[keyCategory].toString() : 'Main Course',
     );
   }
 
@@ -36,6 +41,7 @@ class Pizza {
       keyDescription: description,
       keyPrice: price,
       keyImage: imageUrl,
+      keyCategory: category, // 5. Kirim kategori ke server
     };
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'model/pizza.dart';
 import 'httphelper.dart';
+import 'pizza_detail.dart'; // 1. Penting: Import halaman detail agar bisa dipanggil
 
 void main() {
   runApp(const MyApp());
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'RestFull API Cakrawangsa',
       theme: ThemeData(
+        // Menggunakan warna Indigo (Navy) sesuai keinginan Anda
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
         useMaterial3: true,
       ),
@@ -98,7 +100,6 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             ),
                           ),
-
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                             decoration: BoxDecoration(
@@ -129,6 +130,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               );
             },
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const PizzaDetailScreen()),
           );
         },
       ),

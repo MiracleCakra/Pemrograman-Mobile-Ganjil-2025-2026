@@ -140,12 +140,228 @@ description +
 ```
 
 10. Jalankan aplikasi. Anda harus melihat layar yang mirip dengan berikut ini:
+
 ![img](img/pizzalist.jpg)
+
 Gambar tersebut merupakan tangkapan layar dari daftar item yang diambil melalui HTTP, menampilkan ListView dengan nama pizza dan deskripsinya.
 
 ## Soal 1
 
 1. Tambahkan nama panggilan Anda pada title app sebagai identitas hasil pekerjaan Anda.
+
 2. Gantilah warna tema aplikasi sesuai kesukaan Anda.
+
 ![img](img/pizzalist.jpg)
+
 3. Capture hasil aplikasi Anda, lalu masukkan ke laporan di README dan lakukan commit hasil jawaban Soal 1 dengan pesan "W14: Jawaban Soal 1"
+
+# Praktikum 2: Mengirim Data ke Web Service (POST)
+
+Pada praktikum ini, Anda akan belajar bagaimana melakukan aksi POST pada layanan web. Ini berguna setiap kali Anda terhubung ke layanan web yang tidak hanya menyediakan data tetapi juga memungkinkan Anda untuk mengubah informasi yang disimpan di sisi server. Biasanya, Anda harus memberikan beberapa bentuk otentikasi ke layanan, tetapi untuk codelab ini, karena kita menggunakan layanan mock, ini tidak diperlukan.
+
+Untuk melakukan aksi POST pada layanan web, ikuti langkah-langkah berikut:
+
+Masuk ke layanan Mock Lab dihttps://app.wiremock.cloud/ dan klik pada bagian Stubs dari API contoh. Kemudian, buat stub baru.
+Lengkapi permintaan sebagai berikut:
+
+Nama: Post Pizza
+
+Verb: POST
+
+Alamat: /pizza
+
+Status: 201
+
+Tipe Body: json
+
+Body: {"message": "The pizza was posted"}
+
+![img](img/postpizza.jpg)
+
+Tangkapan layar dari WireMock Post Pizza stub, menampilkan konfigurasi stub dengan nama, verb POST, path, status 201, dan body respons JSON.
+
+3. Tekan tombol Save.
+
+4. Di proyek Flutter, di file httphelper.dart, di kelas HttpHelper, buat metode baru bernama postPizza, sebagai berikut:
+
+
+```dart
+Future<String> postPizza(Pizza pizza) async {
+  const postPath = '/pizza';
+  String post = json.encode(pizza.toJson());
+  Uri url = Uri.https(authority, postPath);
+  http.Response r = await http.post(
+    url,
+    body: post,
+  );
+  return r.body;
+}
+```
+
+5. Di proyek, buat file baru bernama pizza_detail.dart.
+
+6. Di bagian atas file baru, tambahkan impor yang diperlukan:
+
+```dart
+import 'package:flutter/material.dart';
+import 'pizza.dart';
+import 'httphelper.dart';
+```
+
+7. Buat StatefulWidget bernama PizzaDetailScreen:
+
+```dart
+class PizzaDetailScreen extends StatefulWidget {
+  const PizzaDetailScreen({super.key});
+  @override
+  State<PizzaDetailScreen> createState() => _PizzaDetailScreenState();
+}
+
+class _PizzaDetailScreenState extends State<PizzaDetailScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Placeholder();
+  }
+}
+```
+
+8. Di bagian atas kelas _PizzaDetailScreenState, tambahkan lima TextEditingController. Ini akan berisi data untuk objek Pizza yang akan diposting nanti. Juga, tambahkan String yang akan berisi hasil dari permintaan POST:
+
+```dart
+final TextEditingController txtId = TextEditingController();
+final TextEditingController txtName = TextEditingController();
+final TextEditingController txtDescription = TextEditingController();
+final TextEditingController txtPrice = TextEditingController();
+final TextEditingController txtImageUrl = TextEditingController();
+String operationResult = '';
+```
+
+9. Override metode dispose() untuk membuang controller:
+
+```dart
+@override
+void dispose() {
+  txtId.dispose();
+  txtName.dispose();
+  txtDescription.dispose();
+  txtPrice.dispose();
+  txtImageUrl.dispose();
+  super.dispose();
+}
+```
+
+10. Di metode build() dari kelas, kembalikan Scaffold, yang AppBar-nya berisi Text "Pizza Detail" dan body-nya berisi Padding dan SingleChildScrollView yang berisi Column:
+
+```dart
+return Scaffold(
+  appBar: AppBar(
+    title: const Text('Pizza Detail'),
+  ),
+  body: Padding(
+      padding: const EdgeInsets.all(12),
+      child: SingleChildScrollView(
+        child: Column(children: []),
+      )));
+```
+
+11. Untuk properti children dari Column, tambahkan beberapa Text yang akan berisi hasil dari post, lima TextField, masing-masing terikat ke TextEditingController mereka sendiri, dan ElevatedButton untuk menyelesaikan aksi POST (metode postPizza akan dibuat selanjutnya). Juga, tambahkan SizedBox untuk menjauhkan widget di layar:
+
+```dart
+Text(
+  operationResult,
+  style: TextStyle(
+      backgroundColor: Colors.green[200],
+      color: Colors.black),
+),
+const SizedBox(
+  height: 24,
+),
+TextField(
+  controller: txtId,
+  decoration: const InputDecoration(hintText: 'Insert ID'),
+),
+const SizedBox(
+  height: 24,
+),
+TextField(
+  controller: txtName,
+  decoration: const InputDecoration(hintText: 'Insert Pizza Name'),
+),
+const SizedBox(
+  height: 24,
+),
+TextField(
+  controller: txtDescription,
+  decoration: const InputDecoration(hintText: 'Insert Description'),
+),
+const SizedBox(
+  height: 24,
+),
+TextField(
+  controller: txtPrice,
+  decoration: const InputDecoration(hintText: 'Insert Price'),
+),
+const SizedBox(
+  height: 24,
+),
+TextField(
+  controller: txtImageUrl,
+  decoration: const InputDecoration(hintText: 'Insert Image Url'),
+),
+const SizedBox(
+  height: 48,
+),
+ElevatedButton(
+    child: const Text('Send Post'),
+    onPressed: () {
+      postPizza();
+    })
+```
+
+12. Di bagian bawah kelas _PizzaDetailScreenState, tambahkan metode postPizza:
+
+```dart
+Future postPizza() async {
+  HttpHelper helper = HttpHelper();
+  Pizza pizza = Pizza();
+  pizza.id = int.tryParse(txtId.text);
+  pizza.pizzaName = txtName.text;
+  pizza.description = txtDescription.text;
+  pizza.price = double.tryParse(txtPrice.text);
+  pizza.imageUrl = txtImageUrl.text;
+  String result = await helper.postPizza(pizza);
+  setState(() {
+    operationResult = result;
+  });
+}
+```
+
+13. Di file main.dart, impor file pizza_detail.dart
+
+14. Di Scaffold dari metode build() kelas _MyHomePageState, tambahkan FloatingActionButton yang akan navigasi ke rute PizzaDetail:
+
+```dart
+floatingActionButton: FloatingActionButton(
+  child: const Icon(Icons.add),
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => const PizzaDetailScreen()),
+    );
+  }),
+```
+
+15. Jalankan aplikasi. Di layar utama, tekan FloatingActionButton untuk navigasi ke rute PizzaDetail.
+
+16. Tambahkan detail pizza di field teks dan tekan tombol Send Post. Anda seharusnya melihat hasil yang sukses, seperti yang ditunjukkan pada Gambar berikut ini:
+
+![pizza detail](img/pizzadetail.jpg)
+
+## Soal 2
+1. Tambahkan field baru dalam JSON maupun POST ke Wiremock!
+
+    disini saya menambahkan kategori pizza
+![kategoripizza](img/tambahkategori.jpg)
+
+Capture hasil aplikasi Anda berupa GIF di README dan lakukan commit hasil jawaban Soal 2 dengan pesan "W14: Jawaban Soal 2"
