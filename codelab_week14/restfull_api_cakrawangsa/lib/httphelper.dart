@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'model/pizza.dart';
 
 class HttpHelper {
-  // Singleton Pattern
   static final HttpHelper _httpHelper = HttpHelper._internal();
 
   HttpHelper._internal();
@@ -13,11 +12,9 @@ class HttpHelper {
     return _httpHelper;
   }
 
-  // Ganti dengan alamat WireMock Anda sendiri
   final String authority = 'dkvdw.wiremockapi.cloud';
   final String path = 'pizzalist';
 
-  // GET: Mengambil daftar pizza
   Future<List<Pizza>> getPizzaList() async {
     final Uri url = Uri.https(authority, path);
     final http.Response result = await http.get(url);
@@ -31,7 +28,6 @@ class HttpHelper {
     }
   }
 
-  // POST: Menambah pizza baru
   Future<String> postPizza(Pizza pizza) async {
     const postPath = '/pizza';
     String post = json.encode(pizza.toJson());
@@ -43,7 +39,6 @@ class HttpHelper {
     return r.body;
   }
 
-  // PUT: Update pizza yang sudah ada
   Future<String> putPizza(Pizza pizza) async {
     const putPath = '/pizza';
     String put = json.encode(pizza.toJson());
@@ -51,6 +46,16 @@ class HttpHelper {
     http.Response r = await http.put(
       url,
       body: put,
+    );
+    return r.body;
+  }
+
+  // TAMBAHAN: Metode DELETE
+  Future<String> deletePizza(int id) async {
+    const deletePath = '/pizza';
+    Uri url = Uri.https(authority, deletePath);
+    http.Response r = await http.delete(
+      url,
     );
     return r.body;
   }

@@ -514,3 +514,88 @@ floatingActionButton: FloatingActionButton(
 ![img](img/updateput.jpg)
 
 2. Capture hasil aplikasi Anda berupa GIF di README dan lakukan commit hasil jawaban Soal 3 dengan pesan "W14: Jawaban Soal 3"
+
+# Praktikum 4: Menghapus Data dari Web Service (DELETE)
+
+Dalam praktikum ini, Anda akan belajar cara melakukan aksi DELETE pada layanan web. Ini berguna ketika aplikasi Anda perlu menghapus data yang ada di layanan web.
+
+Untuk melakukan aksi DELETE pada layanan web, ikuti langkah-langkah berikut:
+
+1. Masuk ke layanan Wiremock dihttps://app.wiremock.cloud dan klik pada bagian Stubs dari API contoh. Kemudian, buat stub baru.
+
+2. Lengkapi permintaan dengan data berikut:
+
+Nama: Delete Pizza
+
+Verb: DELETE
+
+Alamat: /pizza
+
+Status: 200
+
+Tipe Body: json
+
+Body: {"message": "Pizza was deleted"}
+
+3. Simpan stub baru.
+
+4.  Di proyek Flutter, tambahkan metode `deletePizza` ke kelas `HttpHelper` di file `http_helper.dart`:
+
+<!-- end list -->
+
+```dart
+Future<String> deletePizza(int id) async {
+  const deletePath = '/pizza';
+  Uri url = Uri.https(authority, deletePath);
+  http.Response r = await http.delete(
+    url,
+  );
+  return r.body;
+}
+```
+
+5.  Di file `main.dart`, di metode `build` dari kelas `_MyHomePageState`, refactor `itemBuilder` dari `ListView.builder` sehingga `ListTile` terkandung dalam widget `Dismissible`, sebagai berikut:
+
+<!-- end list -->
+
+```dart
+return ListView.builder(
+    itemCount: (pizzas.data == null) ? 0 : pizzas.data!.length,
+    itemBuilder: (BuildContext context, int position) {
+      return Dismissible(
+        key: Key(position.toString()),
+        onDismissed: (item) {
+          HttpHelper helper = HttpHelper();
+          // Catatan: Logika penghapusan list lokal dan server
+          pizzas.data!.removeWhere(
+              (element) => element.id == pizzas.data![position].id);
+          helper.deletePizza(pizzas.data![position].id!);
+        },
+        child: ListTile(
+          title: Text(pizzas.data![position].pizzaName),
+          subtitle: Text(pizzas.data![position].description +
+              ' - € ' +
+              pizzas.data![position].price.toString()),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => PizzaDetailScreen(
+                      pizza: pizzas.data![position], isNew: false)),
+            );
+          },
+        ),
+      );
+    });
+```
+
+6.  Jalankan aplikasi. Ketika Anda *swipe* (geser) elemen apa pun dari daftar pizza, `ListTile` akan menghilang.
+
+# Soal 4
+1. Capture hasil aplikasi Anda berupa GIF di README dan lakukan commit hasil jawaban Soal 4 dengan pesan "W14: Jawaban Soal 4"
+
+![img](img/hapuspizza.jpg)
+![img](img/request%20delete.jpg)
+![img](img/test%20request%20delete%20api.gif)
+
+
